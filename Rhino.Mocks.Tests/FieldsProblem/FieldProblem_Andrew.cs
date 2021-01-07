@@ -29,7 +29,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 			{
 			}
 
-			Assert.Throws<ExpectationViolationException>("IDbCommand.set_Connection(null); Expected #1, Actual #0.", () => mockCommand.VerifyAllExpectations());
+            Assert.Throws<ExpectationViolationException>(() => mockCommand.VerifyAllExpectations());
 		}
 #endif
 	}

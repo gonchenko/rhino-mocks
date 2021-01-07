@@ -1,0 +1,23 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/FormatAfterReplace/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/MatchCatchClauseWithoutExceptionFilter/@EntryValue">False</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/ReplaceComment/@EntryValue">xUnit Assert.Throw first argument removal</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/ReplacePattern/@EntryValue">Assert.Throws&lt;$ex$&gt;($delegate$);</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/SearchPattern/@EntryValue">Assert.Throws&lt;$ex$&gt;($message$,$delegate$);</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/Severity/@EntryValue">SUGGESTION</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/ShortenReferences/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=delegate/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=delegate/Properties/=Maximal/@EntryIndexedValue">-1</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=delegate/Properties/=Minimal/@EntryIndexedValue">-1</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=delegate/Type/@EntryValue">ArgumentPlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=ex/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=ex/Properties/=ExactType/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=ex/Properties/=Type/@EntryIndexedValue">System.Exception</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=ex/Type/@EntryValue">TypePlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=message/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=message/Properties/=ExactType/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=message/Properties/=ExpressionType/@EntryIndexedValue">System.String</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=2E905540B355E04F8CEEED4797E06036/CustomPatternPlaceholder/=message/Type/@EntryValue">ExpressionPlaceholder</s:String></wpf:ResourceDictionary>

@@ -105,9 +105,8 @@ namespace Rhino.Mocks.Tests.Remoting
 			IDemo demo = (IDemo)mocks.StrictMock(typeof(IDemo));
 			Expect.Call(demo.ReturnIntNoArgs()).Throw(new InvalidOperationException("That was expected."));
 			mocks.ReplayAll();
-			Assert.Throws<InvalidOperationException>(
-				"That was expected.",
-				() => contextSwitcher.DoStuff(demo));
+            Assert.Throws<InvalidOperationException>(
+                () => contextSwitcher.DoStuff(demo));
 		}
 
 
@@ -120,9 +119,8 @@ namespace Rhino.Mocks.Tests.Remoting
 			Expect.Call(demo.ReturnIntNoArgs()).Return(34);
 			demo.VoidStringArg("bang");
 			mocks.ReplayAll();
-			Assert.Throws<ExpectationViolationException>(
-				"IDemo.VoidStringArg(\"34\"); Expected #0, Actual #1.\r\nIDemo.VoidStringArg(\"bang\"); Expected #1, Actual #0.",
-				() => contextSwitcher.DoStuff(demo));
+            Assert.Throws<ExpectationViolationException>(
+                () => contextSwitcher.DoStuff(demo));
 		}
 
 
@@ -146,9 +144,8 @@ namespace Rhino.Mocks.Tests.Remoting
 			RemotableDemoClass demo = (RemotableDemoClass)mocks.StrictMock(typeof(RemotableDemoClass));
 			Expect.Call(demo.Two()).Throw(new InvalidOperationException("That was expected for class."));
 			mocks.ReplayAll();
-			Assert.Throws<InvalidOperationException>(
-				"That was expected for class.",
-				() => contextSwitcher.DoStuff(demo));
+            Assert.Throws<InvalidOperationException>(
+                () => contextSwitcher.DoStuff(demo));
 		}
 
 
@@ -159,9 +156,8 @@ namespace Rhino.Mocks.Tests.Remoting
 			RemotableDemoClass demo = (RemotableDemoClass)mocks.StrictMock(typeof(RemotableDemoClass));
 			Expect.Call(demo.Prop).Return(11);
 			mocks.ReplayAll();
-			Assert.Throws<ExpectationViolationException>(
-				"RemotableDemoClass.Two(); Expected #0, Actual #1.",
-				() => contextSwitcher.DoStuff(demo));
+            Assert.Throws<ExpectationViolationException>(
+                () => contextSwitcher.DoStuff(demo));
 		}
 	}
 

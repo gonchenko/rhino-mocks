@@ -84,9 +84,8 @@ namespace Rhino.Mocks.Tests
 			demo.VoidNoArgs();
 			
 
-			Assert.Throws<ExpectationViolationException>(
-				"Unordered method call! The expected call is: 'Ordered: { IDemo.VoidNoArgs(); }' but was: 'IDemo.VoidStringArg(\"Hello\");'",
-				() => demo.VoidStringArg("Hello"));
+            Assert.Throws<ExpectationViolationException>(
+                () => demo.VoidStringArg("Hello"));
 			
 		}
 
@@ -100,9 +99,8 @@ namespace Rhino.Mocks.Tests
 			
 			mocks.Replay(demo);
 
-			Assert.Throws<ExpectationViolationException>(
-				"Message: Called to prefar foo for bar\nIDemo.VoidNoArgs(); Expected #1, Actual #0.",
-				() => mocks.Verify(demo));
+            Assert.Throws<ExpectationViolationException>(
+                () => mocks.Verify(demo));
 		}
 
 		[Fact]
@@ -116,10 +114,8 @@ namespace Rhino.Mocks.Tests
 			demo.VoidNoArgs();
 			;
 
-			Assert.Throws<ExpectationViolationException>(
-				@"IDemo.VoidNoArgs(); Expected #1, Actual #2.
-Message: Should be called only once",
-				() => demo.VoidNoArgs());
+            Assert.Throws<ExpectationViolationException>(
+                () => demo.VoidNoArgs());
 		}
 
 		[Fact]
@@ -130,9 +126,8 @@ Message: Should be called only once",
 		    mocks.VerifyAll();
 			;
 
-			Assert.Throws<InvalidOperationException>(
-				"Invalid call, the last call has been used or no call has been made (make sure that you are calling a virtual (C#) / Overridable (VB) method).",
-				() => LastCall.IgnoreArguments());
+            Assert.Throws<InvalidOperationException>(
+                () => LastCall.IgnoreArguments());
 		}
 
 		[Fact]
@@ -178,14 +173,13 @@ Message: Should be called only once",
 		public void CallingReplayInOrderringThrows()
 		{
 			demo.VoidStringArg("ayende");
-			Assert.Throws<InvalidOperationException>("Can't start replaying because Ordered or Unordered properties were call and not yet disposed.",
-			                                         () =>
-			                                         {
-			                                         	using (mocks.Ordered())
-			                                         	{
-			                                         		mocks.Replay(demo);
-			                                         	}
-			                                         });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (mocks.Ordered())
+                {
+                    mocks.Replay(demo);
+                }
+            });
 		}
 
 		[Fact]
@@ -254,9 +248,8 @@ Message: Should be called only once",
 			mocks.Replay(second);
 
 			demo.EnumNoArgs();
-			Assert.Throws<ExpectationViolationException>(
-				"Unordered method call! The expected call is: 'Ordered: { IDemo.EnumNoArgs(); }' but was: 'IList.Clear();'",
-				() => second.Clear());
+            Assert.Throws<ExpectationViolationException>(
+                () => second.Clear());
 		}
 
 		[Fact]
@@ -282,9 +275,8 @@ Message: Should be called only once",
 				demo.VoidStringArg("Ayende");
 			}
 			mocks.Replay(demo);
-			Assert.Throws<ExpectationViolationException>(
-				"Unordered method call! The expected call is: 'Ordered: { IDemo.VoidNoArgs(callback method: RhinoMockTests.CallMethodOnDemo); }' but was: 'IDemo.VoidStringArg(\"Ayende\");'",
-				() => demo.VoidNoArgs());
+            Assert.Throws<ExpectationViolationException>(
+                () => demo.VoidNoArgs());
 		}
 
 
@@ -295,9 +287,8 @@ Message: Should be called only once",
 			demo.VoidThreeStringArgs("a","b","c");
 			mocks.Replay(demo);
 
-			Assert.Throws<ExpectationViolationException>(
-				"IDemo.VoidThreeStringArgs(\"c\", \"b\", \"a\"); Expected #0, Actual #1.\r\nIDemo.VoidThreeStringArgs(\"a\", \"b\", \"c\"); Expected #1, Actual #0.",
-				() => demo.VoidThreeStringArgs("c", "b", "a"));
+            Assert.Throws<ExpectationViolationException>(
+                () => demo.VoidThreeStringArgs("c", "b", "a"));
 		}
 
 
@@ -314,9 +305,8 @@ Message: Should be called only once",
 			mocks.Replay(demo);
 			demo.VoidNoArgs();
 
-			Assert.Throws<ExpectationViolationException>(
-				"Unordered method call! The expected call is: 'Ordered: { IDemo.VoidStringArg(\"Ayende\"); }' but was: 'IDemo.VoidThreeStringArgs(\"\", \"\", \"\");'",
-				() => demo.VoidThreeStringArgs("", "", ""));
+            Assert.Throws<ExpectationViolationException>(
+                () => demo.VoidThreeStringArgs("", "", ""));
 		}
 
 		[Fact]

@@ -22,8 +22,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
 		    interfaceMock.GetMyIntValue();
 		    
-			Assert.Throws<ExpectationViolationException>("IRepeatsWithGenerate.GetMyIntValue(); Expected #1, Actual #2.",
-														 () => interfaceMock.GetMyIntValue());
+            Assert.Throws<ExpectationViolationException>(() => interfaceMock.GetMyIntValue());
         }
 
 		[Fact]
@@ -41,8 +40,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
 		    interfaceMock.GetMyIntValue();
 
-			Assert.Throws<ExpectationViolationException>("IRepeatsWithGenerate.GetMyIntValue(); Expected #2, Actual #1.",
-													 () => mockRepository.Verify(interfaceMock));
+            Assert.Throws<ExpectationViolationException>(() => mockRepository.Verify(interfaceMock));
    
         }
 	}
