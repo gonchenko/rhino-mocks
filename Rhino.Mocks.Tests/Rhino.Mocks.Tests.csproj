@@ -114,7 +114,7 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
-    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -468,6 +468,9 @@
     <None Include="..\ayende-open-source.snk">
       <Link>ayende-open-source.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
