@@ -390,7 +390,6 @@
     <Compile Include="MultiMocks.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="PartialMockTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertySetterFixture.cs" />
     <Compile Include="RecordingMocks.cs" />
     <Compile Include="RecursiveMocks.cs" />
