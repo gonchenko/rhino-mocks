@@ -70,7 +70,7 @@ namespace Rhino.Mocks.Tests.Remoting
 			AppDomain.Unload(otherDomain);
 		}
 
-		[Fact]
+		[Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockInterface()
 		{
 			MockRepository mocks = new MockRepository();
@@ -83,7 +83,7 @@ namespace Rhino.Mocks.Tests.Remoting
 		}
 
 	
-		[Fact]
+		[Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockInterfaceWithSameName()
 		{
 			MockRepository mocks = new MockRepository();
@@ -98,7 +98,7 @@ namespace Rhino.Mocks.Tests.Remoting
 			mocks.VerifyAll();
 		}
 
-		[Fact]
+		[Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockInterfaceExpectException()
 		{
 			MockRepository mocks = new MockRepository();
@@ -111,7 +111,7 @@ namespace Rhino.Mocks.Tests.Remoting
 
 
 
-		[Fact]
+		[Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockInterfaceUnexpectedCall()
 		{
 			MockRepository mocks = new MockRepository();
@@ -125,7 +125,7 @@ namespace Rhino.Mocks.Tests.Remoting
 
 
 
-		[Fact]
+		[Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockClass()
 		{
 			MockRepository mocks = new MockRepository();
@@ -149,7 +149,7 @@ namespace Rhino.Mocks.Tests.Remoting
 		}
 
 
-		[Fact]
+		[Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockClassUnexpectedCall()
 		{
 			MockRepository mocks = new MockRepository();
