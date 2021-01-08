@@ -4,7 +4,7 @@
     <IsPackable>false</IsPackable>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\ayende-open-source.snk</AssemblyOriginatorKeyFile>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Impl\RemotingMock" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,14 @@
     <None Include="..\ayende-open-source.snk">
       <Link>ayende-open-source.snk</Link>
     </None>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net48' ">
+    <Compile Remove="Impl\RemotingMock\RemotingProxy.cs" />
+    <Compile Remove="Impl\RemotingMock\IRemotingProxyOperation.cs" />
+    <Compile Remove="Impl\RemotingMock\RemotingInvocation.cs" />
+    <Compile Remove="Impl\RemotingMock\RemotingProxyDetector.cs" />
+    <Compile Remove="Impl\RemotingMock\RemotingProxyMockedObjectGetter.cs" />
   </ItemGroup>
   
   
