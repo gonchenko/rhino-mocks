@@ -61,7 +61,7 @@ namespace Rhino.Mocks.Tests.RecordPlaybackSyntax
 			{
 				Expect.Call(mockedFoo.Bar()).Return(42);
 			}
-			Assert.Throws<ArgumentException>(delegate
+			Assert.ThrowsAsync<ArgumentException>(delegate
 			{
 				using (mockRepository.Playback())
 				{
@@ -76,7 +76,7 @@ namespace Rhino.Mocks.Tests.RecordPlaybackSyntax
 			MockRepository mockRepository;
 			mockRepository = new MockRepository();
 			IFoo mockedFoo = mockRepository.StrictMock<IFoo>();
-			Assert.Throws<ArgumentException>(() =>
+			Assert.ThrowsAsync<ArgumentException>(() =>
 			{
 				using (mockRepository.Record())
 				{
