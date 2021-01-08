@@ -420,7 +420,7 @@
       <Project>{3078B943-10A5-41FA-A68A-7C4FC98506A0}</Project>
       <Name>Rhino.Mocks.Tests.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Rhino.Mocks\Rhino.Mocks 2.0.csproj">
+    <ProjectReference Include="..\Rhino.Mocks\Rhino.Mocks.csproj">
       <Name>Rhino.Mocks</Name>
       <Project>{1E8FECC7-9E9B-4275-A938-D956F5E5D4F8}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
