@@ -33,7 +33,6 @@ using System.Reflection;
 using System.Security.Permissions;
 using Xunit;
 using Rhino.Mocks.Exceptions;
-[assembly:EnvironmentPermission(SecurityAction.RequestMinimum)]
 
 
 namespace Rhino.Mocks.Tests.Remoting
