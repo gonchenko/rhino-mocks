@@ -50,7 +50,7 @@ namespace Rhino.Mocks.Expectations
 		/// <param name="invocation">Invocation for this expectation</param>
 		/// <param name="constraints">Constraints.</param>
         /// <param name="expectedRange">Number of method calls for this expectations</param>
-		public ConstraintsExpectation(IInvocation invocation,AbstractConstraint[] constraints, Range expectedRange) : base(invocation, expectedRange)
+		public ConstraintsExpectation(IInvocation invocation,AbstractConstraint[] constraints, Impl.Range expectedRange) : base(invocation, expectedRange)
 		{
             Validate.IsNotNull(()=>constraints);
 			this.constraints = constraints;

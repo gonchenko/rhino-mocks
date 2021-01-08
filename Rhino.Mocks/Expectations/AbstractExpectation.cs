@@ -54,7 +54,7 @@ namespace Rhino.Mocks.Expectations
         /// <summary>
         /// Range of expected calls that should pass this expectation.
         /// </summary>
-        private Range expected;
+        private Impl.Range expected;
 
         /// <summary>
         /// The return value for a method matching this expectation
@@ -169,7 +169,7 @@ namespace Rhino.Mocks.Expectations
         /// <summary>
         /// Range of expected calls
         /// </summary>
-        public Range Expected
+        public Impl.Range Expected
         {
             get { return expected; }
             set { expected = value; }
@@ -386,7 +386,7 @@ namespace Rhino.Mocks.Expectations
         /// </summary>
         /// <param name="invocation">The originalInvocation for this method, required because it contains the generic type infromation</param>
         /// <param name="expectedRange">Number of method calls for this expectations</param>
-		protected AbstractExpectation(IInvocation invocation, Range expectedRange)
+		protected AbstractExpectation(IInvocation invocation, Impl.Range expectedRange)
         {
             Validate.IsNotNull(invocation, "originalInvocation");
             Validate.IsNotNull(invocation.Method, "method");
@@ -400,7 +400,7 @@ namespace Rhino.Mocks.Expectations
         /// </summary>
         /// <param name="expectation">Expectation.</param>
         protected AbstractExpectation(IExpectation expectation)
-            : this(expectation.Originalinvocation, new Range(1, 1))
+            : this(expectation.Originalinvocation, new Impl.Range(1, 1))
         {
             returnValue = expectation.ReturnValue;
             returnValueSet = expectation.HasReturnValue;
