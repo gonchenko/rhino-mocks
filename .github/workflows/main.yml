@@ -29,4 +29,4 @@ jobs:
         uses: microsoft/setup-msbuild@v1
         
       - name: Build the code
-        run: msbuild
+        run: msbuild /restore
