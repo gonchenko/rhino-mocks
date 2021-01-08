@@ -27,32 +27,29 @@
 #endregion
 
 
-using System;
-using System.Text;
+using System.EnterpriseServices;
 using Xunit;
 
-namespace Rhino.Mocks.Tests
+namespace Rhino.Mocks.Tests.FieldsProblem
 {
-    
-    public class UsingComObject
+    public interface ISomething
     {
-        public interface IMockTest
-        {
-            Scripting.FileSystemObject GetFileSystemObject();
-        }
-        
-        [Fact]
-        public void UsingScriptingFileSystem()
-        {
-            MockRepository mocks = new MockRepository();
-            Type fsoType = Type.GetTypeFromProgID("Scripting.FileSystemObject");
-            Scripting.FileSystemObject fso = (Scripting.FileSystemObject)Activator.CreateInstance(fsoType);
-            IMockTest test = mocks.StrictMock(typeof(IMockTest)) as IMockTest;
-            Expect.Call(test.GetFileSystemObject()).Return(fso);
-            mocks.ReplayAll();
-            Assert.Same(fso, test.GetFileSystemObject());
-            mocks.VerifyAll();
+        void SomeMethod();
+    }
 
+    
+    public class ReproFixture
+    {
+        [Fact]
+        public void TestMethod1()
+        {
+            ServiceDomain.Enter(new ServiceConfig());
+            MockRepository mocks = new MockRepository();
+            ISomething something = (ISomething)mocks.StrictMock(typeof(ISomething));
+            mocks.ReplayAll();
+            mocks.VerifyAll();
+            ContextUtil.SetAbort();
+            ServiceDomain.Leave();
         }
     }
 }

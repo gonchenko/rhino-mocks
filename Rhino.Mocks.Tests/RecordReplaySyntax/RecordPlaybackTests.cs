@@ -51,7 +51,7 @@ namespace Rhino.Mocks.Tests.RecordPlaybackSyntax
 			}
 		}
 
-		[Fact]
+		[Fact(Skip="Doesn't work for Mono. https://github.com/gonchenko/rhino-mocks/issues/4")]
 		public void PlaybackThrowsOtherExceptionDoesntReport()
 		{
 			MockRepository mockRepository;
@@ -70,7 +70,7 @@ namespace Rhino.Mocks.Tests.RecordPlaybackSyntax
 			});
 		}
 
-		[Fact]
+		[Fact(Skip="Doesn't work for Mono. https://github.com/gonchenko/rhino-mocks/issues/4")]
 		public void RecordThrowsOtherExceptionDoesntReport()
 		{
 			MockRepository mockRepository;

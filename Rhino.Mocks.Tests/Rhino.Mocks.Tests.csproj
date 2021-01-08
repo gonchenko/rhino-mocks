@@ -107,10 +107,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Rhino.Mocks.CPP.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Scripting.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -120,9 +116,6 @@
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
-    </Reference>
-    <Reference Include="System.EnterpriseServices">
-      <Name>System.EnterpriseServices</Name>
     </Reference>
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -304,9 +297,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FieldsProblem\FieldProblem_AviOrdering.cs" />
-    <Compile Include="FieldsProblem\FieldProblem_Bruno.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="FieldsProblem\FieldProblem_Marcus.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -407,7 +397,6 @@
     <Compile Include="VerifyTests.cs" />
     <Compile Include="WhenCalledTests.cs" />
     <Compile Include="WithTestFixture.cs" />
-    <Compile Include="UsingComObject.cs" />
     <Compile Include="Utilities\MethodCallTests.cs">
       <SubType>Code</SubType>
     </Compile>
