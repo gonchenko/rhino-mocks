@@ -35,6 +35,7 @@ using Xunit;
 using Rhino.Mocks.Expectations;
 using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
+using Range = Rhino.Mocks.Impl.Range;
 
 namespace Rhino.Mocks.Tests.Expectations
 {

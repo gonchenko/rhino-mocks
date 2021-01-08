@@ -40,6 +40,7 @@ using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
 using Rhino.Mocks.Tests.Expectations;
 using Rhino.Mocks.Utilities;
+using Range = Rhino.Mocks.Impl.Range;
 
 namespace Rhino.Mocks.Tests
 {

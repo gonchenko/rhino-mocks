@@ -115,7 +115,7 @@ namespace Rhino.Mocks.Tests.Impl
 			record.LastExpectation.ReturnValue = true;
 			record.MethodCall(new FakeInvocation(method), method, "y");
 			record.LastExpectation.ReturnValue = true;
-			record.LastExpectation.Expected = new Range(2, 2);
+			record.LastExpectation.Expected = new Rhino.Mocks.Impl.Range(2, 2);
 			ReplayMockState replay = new ReplayMockState(record);
 			try
 			{
@@ -141,7 +141,7 @@ namespace Rhino.Mocks.Tests.Impl
 				record.LastExpectation.ReturnValue = true;
                 record.MethodCall(new FakeInvocation(method), method, "y");
 				record.LastExpectation.ReturnValue = true;
-				record.LastExpectation.Expected = new Range(2, 2);
+				record.LastExpectation.Expected = new Rhino.Mocks.Impl.Range(2, 2);
 			}
 			ReplayMockState replay = new ReplayMockState(record);
 			try
