@@ -280,7 +280,7 @@ namespace Rhino.Mocks.Tests
 			AppDomain appDomain = mocks.StrictMock<AppDomain>();
 			Expect.Call(appDomain.BaseDirectory).Return("/home/user/ayende");
 			mocks.ReplayAll();
-			Assert.Equal(appDomain.BaseDirectory, "/home/user/ayende" );
+			Assert.Equal("/home/user/ayende" , appDomain.BaseDirectory);
 			mocks.VerifyAll();
 		}
 

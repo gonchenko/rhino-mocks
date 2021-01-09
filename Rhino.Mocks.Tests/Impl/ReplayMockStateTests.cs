@@ -61,7 +61,7 @@ namespace Rhino.Mocks.Tests.Impl
 		[Fact]
 		public void CreatingReplayMockStateFromRecordMockStateCopiesTheExpectationList()
 		{
-			Assert.Equal(1, Get.Recorder(mocks).GetAllExpectationsForProxy(proxy).Count);
+			Assert.Single(Get.Recorder(mocks).GetAllExpectationsForProxy(proxy));
 		}
 
 		[Fact]

@@ -61,7 +61,7 @@ namespace Rhino.Mocks.Tests.MethodRecorders
 			//move to replayer
 			recorder.GetRecordedExpectation(new FakeInvocation(voidNoArgs), demo, voidNoArgs, new object[0]);
 			ExpectationsList expectations = recorder.GetAllExpectationsForProxy(demo);
-			Assert.Equal(1, expectations.Count);
+			Assert.Single(expectations);
 		}
 
 		[Fact]
@@ -78,7 +78,7 @@ namespace Rhino.Mocks.Tests.MethodRecorders
 			recorder.GetRecordedExpectation(new FakeInvocation(voidNoArgs), demo, voidNoArgs, new object[0]);
 			
 			ExpectationsList expectations = recorder.GetAllExpectationsForProxy(demo);
-			Assert.Equal(1, expectations.Count);
+			Assert.Single(expectations);
 			Assert.Equal(expectations[0],newExpectation);
 		}
 
@@ -93,9 +93,9 @@ namespace Rhino.Mocks.Tests.MethodRecorders
 			recorder.GetRecordedExpectation(new FakeInvocation(voidNoArgs), demo, voidNoArgs, new object[0]);
 			
 			ExpectationsList expectations = recorder.GetAllExpectationsForProxyAndMethod(demo, voidNoArgs);
-			Assert.Equal(1, expectations.Count);
+			Assert.Single(expectations);
 			expectations = recorder.GetAllExpectationsForProxyAndMethod(demo, voidThreeArgs);
-			Assert.Equal(1, expectations.Count);
+			Assert.Single(expectations);
 		}
 
 		[Fact]

@@ -30,6 +30,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Xunit;
@@ -111,12 +112,15 @@ namespace Rhino.Mocks.Tests
 		[Fact]
 		public void WillDisplayMethodUsingArraysCorrectly()
 		{
-			string result = MethodCallUtil.StringPresentation(null, GetType().GetMethod("MethodUsingArray"), new object[] { 1, new string[] { "a", "b" } });
-			Assert.Equal("Coverage.MethodUsingArray(1, [\"a\", \"b\"]);",result );
+			string result = MethodCallUtil.StringPresentation(null, typeof(ClassWithArrayMethod).GetMethod("MethodUsingArray"), new object[] { 1, new string[] { "a", "b" } });
+			Assert.Equal("ClassWithArrayMethod.MethodUsingArray(1, [\"a\", \"b\"]);",result );
 		}
 
-		public void MethodUsingArray(int i, string[] foo)
+		public class ClassWithArrayMethod
 		{
+			public void MethodUsingArray(int i, string[] foo)
+			{
+			}
 		}
 
 		private delegate string ToStringDelegate();

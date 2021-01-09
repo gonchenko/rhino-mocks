@@ -91,7 +91,7 @@ namespace Rhino.Mocks.Tests.MethodRecorders
 			ExpectationsList expectations = recorder.GetAllExpectationsForProxyAndMethod(demo, voidNoArgs);
 			Assert.Equal(2, expectations.Count);
 			expectations = recorder.GetAllExpectationsForProxyAndMethod(demo, voidThreeArgs);
-			Assert.Equal(1, expectations.Count);
+			Assert.Single(expectations);
 		}
 
 		[Fact]

@@ -139,7 +139,7 @@ namespace Rhino.Mocks.Tests.Remoting
 		}
 
 
-
+        [Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockClassExpectException()
 		{
 			MockRepository mocks = new MockRepository();
