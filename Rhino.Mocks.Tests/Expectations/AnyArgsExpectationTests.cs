@@ -30,7 +30,6 @@
 using System;
 using System.Reflection;
 using Castle.DynamicProxy;
-using Castle.DynamicProxy;
 using Xunit;
 using Rhino.Mocks.Expectations;
 using Rhino.Mocks.Impl;

@@ -35,7 +35,6 @@ using System.Collections.Specialized;
 using System.Reflection;
 using System.Text;
 using Castle.DynamicProxy;
-using Castle.DynamicProxy;
 using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Generated;
 using Rhino.Mocks.Impl;

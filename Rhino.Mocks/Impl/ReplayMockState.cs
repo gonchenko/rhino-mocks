@@ -33,7 +33,6 @@ using System.Text;
 using Castle.DynamicProxy;
 using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Interfaces;
-using Castle.DynamicProxy;
 
 namespace Rhino.Mocks.Impl
 {
