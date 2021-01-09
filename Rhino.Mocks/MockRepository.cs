@@ -794,7 +794,7 @@ namespace Rhino.Mocks
                 delegateTargetInterface,
                 types, proxyGenerationOptions, interceptor);
 
-            proxy = Delegate.CreateDelegate(type, target, delegateTargetInterface.Name+ ".Invoke");
+            proxy = Delegate.CreateDelegate(type, target, "Invoke");
             delegateProxies.Add(target, proxy);
 
             IMockState value = mockStateFactory(GetMockedObject(proxy));
