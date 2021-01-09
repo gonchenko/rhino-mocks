@@ -33,6 +33,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using Castle.DynamicProxy;
 using Rhino.Mocks.Exceptions;
@@ -208,12 +209,13 @@ namespace Rhino.Mocks
         /// </summary>
         public MockRepository()
         {
+            var customAttribute = CustomAttributeInfo.FromExpression(() => new __ProtectAttribute());
             proxyGenerationOptions = new ProxyGenerationOptions
             {
-                AttributesToAddToGeneratedTypes = 
-                    {
-                        new __ProtectAttribute()
-                    }
+                AdditionalAttributes =
+                {
+                    customAttribute
+                }
             };
             recorders = new Stack();
             repeatableMethods = new ProxyMethodExpectationsDictionary();
