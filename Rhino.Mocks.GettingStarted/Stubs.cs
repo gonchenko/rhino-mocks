@@ -43,17 +43,5 @@ namespace Rhino.Mocks.GettingStarted
             int ID { get; }
             string Name { get; set; }
         }
-
-        public class Foo : IFoo
-        {
-            private int id;
-
-            public int ID
-            {
-                get { return id; }
-            }
-
-            public string Name { get; set; }
-        }
     }
 }

@@ -91,10 +91,10 @@ namespace Rhino.Mocks.Tests
             mocks.ReplayAll();
 
             comf1.TheMethod();
-            Assert.Equal(false, comf1.OriginalMethodCalled);
+            Assert.False(comf1.OriginalMethodCalled);
 
             comf2.TheMethod();
-            Assert.Equal(true, comf2.OriginalMethodCalled);
+            Assert.True(comf2.OriginalMethodCalled);
         }
 
 		[Fact]
@@ -110,10 +110,10 @@ namespace Rhino.Mocks.Tests
             mockRepository.ReplayAll();
 
             comf1.TheMethod();
-            Assert.Equal(false, comf1.OriginalMethodCalled);
+            Assert.False(comf1.OriginalMethodCalled);
 
             comf2.TheMethod();
-            Assert.Equal(true, comf2.OriginalMethodCalled);
+            Assert.True(comf2.OriginalMethodCalled);
 
             Assert.Throws<ExpectationViolationException>(() => mockRepository.VerifyAll());
 		}

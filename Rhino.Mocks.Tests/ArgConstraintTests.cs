@@ -373,7 +373,7 @@ namespace Rhino.Mocks.Tests
             stub.Stub(x => x.GetUser(Arg<long>.Is.Equal(1))).Return("test"); // 1 is inferred as Int32 (not Int64)
 
             // Assert
-            Assert.Equal(null, stub.GetUser(0));
+            Assert.Null(stub.GetUser(0));
             Assert.Equal("test", stub.GetUser(1));
         }
 
@@ -388,7 +388,7 @@ namespace Rhino.Mocks.Tests
 
             // Assert
             Assert.Equal("test", actual);
-            Assert.Equal(null, stub.GetUser(1));
+            Assert.Null(stub.GetUser(1));
         }
 
         [Fact]
@@ -399,8 +399,8 @@ namespace Rhino.Mocks.Tests
             stub.Stub(x => x.GetUser(Arg<long>.Is.GreaterThan(1))).Return("test"); // 1 is inferred as Int32 (not Int64)
 
             // Assert
-            Assert.Equal(null, stub.GetUser(0));
-            Assert.Equal(null, stub.GetUser(1));
+            Assert.Null(stub.GetUser(0));
+            Assert.Null(stub.GetUser(1));
             Assert.Equal("test", stub.GetUser(2));
         }
 
@@ -412,7 +412,7 @@ namespace Rhino.Mocks.Tests
             stub.Stub(x => x.GetUser(Arg<long>.Is.GreaterThanOrEqual(2))).Return("test"); // 1 is inferred as Int32 (not Int64)
 
             // Assert
-            Assert.Equal(null, stub.GetUser(1));
+            Assert.Null(stub.GetUser(1));
             Assert.Equal("test", stub.GetUser(2));
             Assert.Equal("test", stub.GetUser(3));
         }
@@ -426,8 +426,8 @@ namespace Rhino.Mocks.Tests
 
             // Assert
             Assert.Equal("test", stub.GetUser(1));
-            Assert.Equal(null, stub.GetUser(2));
-            Assert.Equal(null, stub.GetUser(3));
+            Assert.Null(stub.GetUser(2));
+            Assert.Null(stub.GetUser(3));
         }
 
         [Fact]
@@ -440,7 +440,7 @@ namespace Rhino.Mocks.Tests
             // Assert
             Assert.Equal("test", stub.GetUser(1));
             Assert.Equal("test", stub.GetUser(2));
-            Assert.Equal(null, stub.GetUser(3));
+            Assert.Null(stub.GetUser(3));
         }
 
         public interface ITestService

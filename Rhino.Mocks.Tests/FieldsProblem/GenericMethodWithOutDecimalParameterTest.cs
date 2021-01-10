@@ -31,15 +31,5 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 				Assert.Equal(expectedOutParameter, outParameter);
 			}
 		}
-
-		public static void Foo(out decimal d)
-		{
-			d = 1.234M;
-		}
-
-		public static void Foo(out int d)
-		{
-			d = 1;
-		}
 	}
 }

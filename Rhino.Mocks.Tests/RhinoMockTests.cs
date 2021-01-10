@@ -29,7 +29,6 @@
 
 using System;
 using System.Collections;
-using System.ServiceModel;
 using Xunit;
 using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Tests.Callbacks;
@@ -39,8 +38,8 @@ namespace Rhino.Mocks.Tests
 	
 	public class RhinoMockTests
 	{
-		private MockRepository mocks;
-		private IDemo demo;
+		protected MockRepository mocks;
+		protected IDemo demo;
 
 		public RhinoMockTests()
 		{
@@ -321,16 +320,6 @@ namespace Rhino.Mocks.Tests
 			mocks.VerifyAll();
 		}
 
-		[Fact]
-		public void CallbackThatThrows()
-		{
-			demo = (IDemo) mocks.StrictMock(typeof (IDemo));
-			demo.VoidNoArgs();
-			LastCall.Callback(new DelegateDefinations.NoArgsDelegate(ThrowFromCallback));
-			mocks.ReplayAll();
-			Assert.Throws<AddressAlreadyInUseException>(demo.VoidNoArgs);
-		}
-
 		#region Private Methods
 
 		private static void RecordOrdered(MockRepository mocks, IDemo demo)
@@ -352,11 +341,6 @@ namespace Rhino.Mocks.Tests
 		{
 			demo.VoidStringArg("Ayende");
 			return true;
-		}
-
-		private bool ThrowFromCallback()
-		{
-			throw new AddressAlreadyInUseException();
 		}
 
 		public class ObjectThatOverrideToString

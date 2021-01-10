@@ -64,7 +64,7 @@ namespace Rhino.Mocks.Tests.Impl
 			RecordMockState recordState = new RecordMockState(proxy, mocks);
             recordState.MethodCall(new FakeInvocation(method), method, "1");
 			recordState.LastExpectation.ReturnValue = false;
-			Assert.Equal(1, Get.Recorder(mocks).GetAllExpectationsForProxyAndMethod(proxy, method).Count);
+			Assert.Single(Get.Recorder(mocks).GetAllExpectationsForProxyAndMethod(proxy, method));
             recordState.MethodCall(new FakeInvocation(method), method, "2");
 			recordState.LastExpectation.ReturnValue = false;
 			Assert.Equal(2, Get.Recorder(mocks).GetAllExpectationsForProxyAndMethod(proxy, method).Count);
@@ -147,7 +147,7 @@ namespace Rhino.Mocks.Tests.Impl
             RecordMockState recordState = new RecordMockState(new ProxyInstance(mocks), mocks);
             Assert.Null(recordState.LastExpectation);
             recordState.MethodCall(new FakeInvocation(method), method, "");
-            Assert.IsType(typeof(ArgsEqualExpectation), recordState.LastExpectation);
+            Assert.IsType<ArgsEqualExpectation>(recordState.LastExpectation);
         }
 
         [Fact]
@@ -158,7 +158,7 @@ namespace Rhino.Mocks.Tests.Impl
             RecordMockState recordState = new RecordMockState(new ProxyInstance(mocks), mocks);
             Assert.Null(recordState.LastExpectation);
             recordState.MethodCall(new FakeInvocation(methodWithOutParams), methodWithOutParams, "", 0);
-			Assert.IsType(typeof(ConstraintsExpectation), recordState.LastExpectation);
+			Assert.IsType<ConstraintsExpectation>(recordState.LastExpectation);
         }
 	}
 

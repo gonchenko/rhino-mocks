@@ -2,11 +2,47 @@ namespace Rhino.Mocks.Impl.RemotingMock
 {
     using System;
     using Rhino.Mocks.Interfaces;
-    using Castle.Core.Interceptor;
+    using Castle.DynamicProxy;
 
     /// <summary>
     /// Generates remoting proxies and provides utility functions
     /// </summary>
+#if NETCOREAPP3_1
+    internal class RemotingMockGenerator
+    {
+        ///<summary>
+        /// Create the proxy using remoting
+        ///</summary>
+        public object CreateRemotingMock(Type type, IInterceptor interceptor, IMockedObject mockedObject)
+        {
+            throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
+        }
+
+        /// <summary>
+        /// Check whether an object is a transparent proxy with a RemotingProxy behind it
+        /// </summary>
+        /// <param name="obj">Object to check</param>
+        /// <returns>true if the object is a transparent proxy with a RemotingProxy instance behind it, false otherwise</returns>
+        /// <remarks>We use Equals() method to communicate with the real proxy behind the object.
+        /// See IRemotingProxyOperation for more details</remarks>
+        public static bool IsRemotingProxy(object obj)
+        {
+            throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
+        }
+
+        /// <summary>
+        /// Retrieve a mocked object from a transparent proxy
+        /// </summary>
+        /// <param name="proxy">Transparent proxy with a RemotingProxy instance behind it</param>
+        /// <returns>Mocked object associated with the proxy</returns>
+        /// <remarks>We use Equals() method to communicate with the real proxy behind the object.
+        /// See IRemotingProxyOperation for more details</remarks>
+        public static IMockedObject GetMockedObjectFromProxy(object proxy)
+        {
+            throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
+        }
+    }
+#else
     internal class RemotingMockGenerator
     {
         ///<summary>
@@ -53,4 +89,5 @@ namespace Rhino.Mocks.Impl.RemotingMock
             return getter.MockedObject;
         }
     }
+#endif
 }

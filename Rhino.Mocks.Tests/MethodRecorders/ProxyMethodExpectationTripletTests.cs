@@ -35,6 +35,7 @@ using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
 using Rhino.Mocks.MethodRecorders;
 using Rhino.Mocks.Tests.Expectations;
+using Range = Rhino.Mocks.Impl.Range;
 
 namespace Rhino.Mocks.Tests.MethodRecorders
 {

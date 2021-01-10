@@ -289,7 +289,7 @@ namespace Rhino.Mocks.Tests
 			}
 			DemoEnum d = DemoEnum.NonDemo;
 			d = (DemoEnum)demo.EnumNoArgs();
-			Assert.Equal(d, DemoEnum.Demo);
+			Assert.Equal(DemoEnum.Demo, d);
 		}
 
 		[Fact]
@@ -336,7 +336,7 @@ namespace Rhino.Mocks.Tests
 			LastCall.On(demo).Return(DemoEnum.NonDemo).Repeat.Once();
 			mocks.Replay(demo);
 			DemoEnum d = (DemoEnum)demo.EnumNoArgs();
-			Assert.Equal(d, DemoEnum.NonDemo);
+			Assert.Equal(DemoEnum.NonDemo, d);
 			try
 			{
 				demo.EnumNoArgs();

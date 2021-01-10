@@ -54,7 +54,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
 			pluginMng.GetPlugins(out allPlugins);
 
-			Assert.Equal(1, allPlugins.Length);
+			Assert.Single(allPlugins);
 			Assert.Same(plugin, allPlugins[0]);
 		}
 

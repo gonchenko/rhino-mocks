@@ -56,7 +56,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
 		}
 
-		public void MethodThatSubscribeToEventBlah(IWithEvents events)
+		private void MethodThatSubscribeToEventBlah(IWithEvents events)
 		{
 			events.Blah += new EventHandler(events_Blah);
 		}

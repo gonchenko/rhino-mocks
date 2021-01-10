@@ -27,33 +27,50 @@
 #endregion
 
 
-using System;
-using Castle.DynamicProxy;
+using System.Web.UI;
+using Xunit;
 
-namespace Rhino.Mocks.Utilities
+namespace Rhino.Mocks.Tests.FieldsProblem
 {
-	/// <summary>
-	/// Utility to get the default value for a type
-	/// </summary>
-	public class ReturnValueUtil
-	{
-		/// <summary>
-		/// The default value for a type.
-		/// Null for reference types and void
-		/// 0 for value types.
-		/// First element for enums
-		/// Note that we need to get the value even for opened generic types, such as those from
-		/// generic methods.
-		/// </summary>
-		/// <param name="type">Type.</param>
-		/// <param name="invocation">The invocation.</param>
-		/// <returns>the default value</returns>
-		public static object DefaultValue(Type type, IInvocation invocation)
-		{
-			type = GenericsUtil.GetRealType(type, invocation);
-			if (type.IsValueType == false || type==typeof(void))
-				return null;
-			return Activator.CreateInstance(type);
-		}
-	}
+    
+    public class FieldProblem_David
+    {
+        [Fact]
+        public void MockWebUIPageClass()
+        {
+            MockRepository mocks = new MockRepository();
+            Page page = (Page)mocks.StrictMock(typeof(Page));
+            page.Validate();
+            mocks.ReplayAll();
+            page.Validate();
+            mocks.VerifyAll();
+        }
+
+        [Fact]
+        public void MockClassWithVirtualMethodCallFromConstructor()
+        {
+            MockRepository mocks = new MockRepository();
+            ClassWithVirtualMethodCallFromConstructor cwvmcfc = (ClassWithVirtualMethodCallFromConstructor)mocks.StrictMock(typeof(ClassWithVirtualMethodCallFromConstructor));
+            Assert.NotNull(cwvmcfc);
+            Expect.Call(cwvmcfc.ToString()).Return("Success");
+            mocks.ReplayAll();
+            Assert.Equal("Success", cwvmcfc.ToString());
+            mocks.VerifyAll();
+        }
+
+        public class ClassWithVirtualMethodCallFromConstructor
+        {
+            public ClassWithVirtualMethodCallFromConstructor()
+            {
+                VirtualCall();
+            }
+
+            public override string ToString()
+            {
+                return base.ToString();
+            }
+
+            public virtual void VirtualCall() { }
+        }
+    }
 }
