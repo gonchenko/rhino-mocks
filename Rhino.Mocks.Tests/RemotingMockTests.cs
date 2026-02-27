@@ -29,6 +29,7 @@ using System;
 using Xunit;
 using Rhino.Mocks.Exceptions;
 
+#if NETFRAMEWORK
 namespace Rhino.Mocks.Tests
 {
     
@@ -381,3 +382,4 @@ namespace Rhino.Mocks.Tests
         }
     }
 }
+#endif

@@ -38,13 +38,17 @@ namespace Rhino.Mocks.Tests
 	{
 		MockRepository mocks;
 		IRefAndOut target;
+#if NETFRAMEWORK
 		private RemotingProxyWithOutRef remotingTarget;
+#endif
 
 		public MockWithRefAndOutParams()
 		{
 			mocks = new MockRepository();
 			target = (IRefAndOut)mocks.StrictMock(typeof(IRefAndOut));
+#if NETFRAMEWORK
 			remotingTarget = mocks.StrictMock<RemotingProxyWithOutRef>();
+#endif
 		}
 
 		[Fact]
@@ -92,6 +96,7 @@ namespace Rhino.Mocks.Tests
 		}
 
 
+#if NETFRAMEWORK
 		[Fact]
 		public void RemotingRefString()
 		{
@@ -102,7 +107,9 @@ namespace Rhino.Mocks.Tests
 			remotingTarget.RefStr(ref s);
 			Assert.Equal("Hello", s);
 		}
+#endif
 
+#if NETFRAMEWORK
 		[Fact]
 		public void RemotingOutString()
 		{
@@ -113,7 +120,9 @@ namespace Rhino.Mocks.Tests
 			remotingTarget.OutStr(out s);
 			Assert.Equal("Hello", s);
 		}
+#endif
 
+#if NETFRAMEWORK
 		[Fact]
 		public void RemotingOutInt()
 		{
@@ -124,7 +133,9 @@ namespace Rhino.Mocks.Tests
 			remotingTarget.OutInt(out i);
 			Assert.Equal(5, i);
 		}
+#endif
 
+#if NETFRAMEWORK
 		[Fact]
 		public void RemotingRefInt()
 		{
@@ -135,6 +146,7 @@ namespace Rhino.Mocks.Tests
 			remotingTarget.RefInt(ref i);
 			Assert.Equal(5, i);
 		}
+#endif
 
 		private void RefFive(ref int i)
 		{

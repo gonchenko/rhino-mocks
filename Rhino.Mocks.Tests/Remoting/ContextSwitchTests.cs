@@ -38,6 +38,7 @@ using Rhino.Mocks.Exceptions;
 namespace Rhino.Mocks.Tests.Remoting
 {
 
+#if NET48
 	/// <summary>
 	/// Test scenarios where mock objects are called from different
 	/// application domain.
@@ -162,5 +163,6 @@ namespace Rhino.Mocks.Tests.Remoting
                 () => contextSwitcher.DoStuff(demo));
 		}
 	}
+#endif
 
 }

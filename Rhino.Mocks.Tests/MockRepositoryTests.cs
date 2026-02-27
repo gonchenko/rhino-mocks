@@ -574,6 +574,7 @@ namespace Rhino.Mocks.Tests
             Assert.NotNull(MockRepository.GenerateMock<IDemo>());
         }
 
+#if NETFRAMEWORK
 		[Fact]
 		public void GenerateStrictMockWithRemoting()
 		{
@@ -583,7 +584,9 @@ namespace Rhino.Mocks.Tests
 			Assert.True(mock.GetMockRepository().IsInReplayMode(mock));
 #endif
 		}
+#endif
 
+#if NETFRAMEWORK
 		[Fact]
 		public void GenerateDynamicMockWithRemoting()
 		{
@@ -593,6 +596,7 @@ namespace Rhino.Mocks.Tests
 			Assert.True(mock.GetMockRepository().IsInReplayMode(mock));
 #endif
         }
+#endif
 
 		public class ClassWithNonDefaultConstructor 
         {
