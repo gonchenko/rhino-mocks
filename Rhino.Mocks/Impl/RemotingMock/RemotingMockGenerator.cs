@@ -7,7 +7,7 @@ namespace Rhino.Mocks.Impl.RemotingMock
     /// <summary>
     /// Generates remoting proxies and provides utility functions
     /// </summary>
-#if NETCOREAPP3_1
+#if !NET48
     internal class RemotingMockGenerator
     {
         ///<summary>

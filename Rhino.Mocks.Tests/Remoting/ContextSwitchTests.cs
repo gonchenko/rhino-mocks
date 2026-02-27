@@ -53,7 +53,7 @@ namespace Rhino.Mocks.Tests.Remoting
 			FileInfo assemblyFile = new FileInfo(
 				Assembly.GetExecutingAssembly().Location);
 
-#if NETCOREAPP3_1 
+#if !NET48 
 			otherDomain = AppDomain.CreateDomain("other domain");
 #else
 			otherDomain = AppDomain.CreateDomain("other domain", null,
