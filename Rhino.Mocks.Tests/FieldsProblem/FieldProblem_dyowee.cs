@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+#if NETFRAMEWORK
 using ADODB;
+#endif
 using Xunit;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
-	
+#if NETFRAMEWORK
 	public class FieldProblem_dyowee
 	{
 		[Fact]
@@ -21,4 +23,5 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 			mr.VerifyAll();
 		}
 	}
+#endif
 }
