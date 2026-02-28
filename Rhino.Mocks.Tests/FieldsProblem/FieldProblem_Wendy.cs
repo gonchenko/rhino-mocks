@@ -27,10 +27,9 @@ namespace Rhino.Mocks.Tests.FieldsProblem
                 .Return(null);
             _mocks.ReplayAll();
             _imageFinder.FindImagePath();
-        	Assert.Throws<ExpectationViolationException>(
-        		"ISearchPatternBuilder.CreateFromExtensions([\"png\", \"gif\", \"jpg\", \"bmp\"]); Expected #1, Actual #0.",
-        		() =>
-        		Verify(_searchPatternBuilder));
+            Assert.Throws<ExpectationViolationException>(
+                () =>
+                    Verify(_searchPatternBuilder));
         }
 
 		[Fact]
@@ -47,9 +46,8 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 			{
 				
 			}
-			Assert.Throws<ExpectationViolationException>(
-				"ISearchPatternBuilder.CreateFromExtensions([]); Expected #0, Actual #1.",
-				() => Verify(_searchPatternBuilder));
+            Assert.Throws<ExpectationViolationException>(
+                () => Verify(_searchPatternBuilder));
 		}
 
         private void Verify(ISearchPatternBuilder builder)

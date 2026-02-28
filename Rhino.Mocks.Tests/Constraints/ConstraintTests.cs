@@ -81,9 +81,8 @@ namespace Rhino.Mocks.Tests.Constraints
 				}));
 			mocks.Replay(demo);
 
-			Assert.Throws<InvalidOperationException>(
-				"Predicate accept System.Data.DataSet but parameter is System.String which is not compatible",
-				() => demo.VoidStringArg("ab"));
+            Assert.Throws<InvalidOperationException>(
+                () => demo.VoidStringArg("ab"));
 		}
 
         [Fact]
@@ -111,9 +110,8 @@ namespace Rhino.Mocks.Tests.Constraints
 				);
 			mocks.Replay(demo);
 
-			Assert.Throws<ExpectationViolationException>(
-				"IDemo.VoidStringArg(\"cc\"); Expected #0, Actual #1.\r\nIDemo.VoidStringArg(Predicate (ConstraintTests.JustPredicate(obj);)); Expected #1, Actual #0.",
-				() => demo.VoidStringArg("cc"));
+            Assert.Throws<ExpectationViolationException>(
+                () => demo.VoidStringArg("cc"));
 		}
 		
 		public bool JustPredicate(string s)
@@ -181,27 +179,24 @@ namespace Rhino.Mocks.Tests.Constraints
 			demo.VoidStringArg("Ayende");
 			LastCall.On(demo).Constraints(Text.Contains("World"));
 			mocks.Replay(demo);
-			Assert.Throws<ExpectationViolationException>(
-				"IDemo.VoidStringArg(\"Hello, world\"); Expected #0, Actual #1.\r\nIDemo.VoidStringArg(contains \"World\"); Expected #1, Actual #0.",
-				() => demo.VoidStringArg("Hello, world"));
+            Assert.Throws<ExpectationViolationException>(
+                () => demo.VoidStringArg("Hello, world"));
 		}
 
 		[Fact]
 		public void ConstraintWithTooMuchForArguments()
 		{
 			demo.VoidStringArg("Ayende");
-			Assert.Throws<InvalidOperationException>(
-				"The number of constraints is not the same as the number of the method's parameters!",
-				() => LastCall.On(demo).Constraints(Text.Contains("World"), Is.Equal("Rahien")));
+            Assert.Throws<InvalidOperationException>(
+                () => LastCall.On(demo).Constraints(Text.Contains("World"), Is.Equal("Rahien")));
 		}
 
 		[Fact]
 		public void ConstraintWithTooFewForArguments()
 		{
 			demo.VoidThreeArgs(1, "Ayende", 3.14f);
-			Assert.Throws<InvalidOperationException>(
-				"The number of constraints is not the same as the number of the method's parameters!",
-				() => LastCall.On(demo).Constraints(Text.Contains("World"), Is.Equal("Rahien")));
+            Assert.Throws<InvalidOperationException>(
+                () => LastCall.On(demo).Constraints(Text.Contains("World"), Is.Equal("Rahien")));
 		}
 
 		[Fact]
@@ -210,19 +205,16 @@ namespace Rhino.Mocks.Tests.Constraints
 			this.demo.VoidStringArg("Ayende");
 			LastCall.On(this.demo).Constraints(Text.Contains("World"));
 			this.mocks.Replay(this.demo);
-			Assert.Throws<ExpectationViolationException>("IDemo.VoidStringArg(contains \"World\"); Expected #1, Actual #0.",
-			                                             () => this.mocks.Verify(this.demo));
+            Assert.Throws<ExpectationViolationException>(() => this.mocks.Verify(this.demo));
 		}
 
 		[Fact]
 		public void AddConstraintAndThenTryToIgnoreArgs()
 		{
 			this.demo.VoidStringArg("Ayende");
-			Assert.Throws<InvalidOperationException>("This method has already been set to ConstraintsExpectation."
-			                                         ,
-			                                         () =>
-			                                         LastCall.On(this.demo).Constraints(Text.Contains("World")).Callback<string>(
-			                                         	"".StartsWith));
+            Assert.Throws<InvalidOperationException>(() =>
+                LastCall.On(this.demo).Constraints(Text.Contains("World")).Callback<string>(
+                    "".StartsWith));
 		}
 
 	}

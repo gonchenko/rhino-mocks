@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="1.3.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="FieldsProblem\FieldProblem_Bruno.cs">
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f">
+        <HintPath>..\SharedLibs\Scripting.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Configuration" />
+      <Reference Include="System.EnterpriseServices" />
+      <Reference Include="System.ServiceModel" />
+      <Reference Include="System.Web" />
+      <Reference Include="System.Web.ApplicationServices" />
+      <Reference Include="System.Windows.Forms" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Rhino.Mocks.Tests\Rhino.Mocks.Tests.csproj" />
+      <ProjectReference Include="..\Rhino.Mocks\Rhino.Mocks.csproj" />
+    </ItemGroup>
+
+</Project>

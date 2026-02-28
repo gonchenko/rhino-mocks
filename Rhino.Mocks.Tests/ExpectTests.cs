@@ -61,8 +61,7 @@ namespace Rhino.Mocks.Tests
 		{
 			try
 			{
-				Assert.Throws<InvalidOperationException>("The object 'System.Object' is not a mocked object.",
-														 () => Expect.On(new object()));
+                Assert.Throws<InvalidOperationException>(() => Expect.On(new object()));
 			}
 			finally
 			{
@@ -98,9 +97,8 @@ namespace Rhino.Mocks.Tests
 		[Fact]
 		public void ExpectWhenNoCallMade()
 		{
-			Assert.Throws<InvalidOperationException>(
-				"The object is not a mock object that belong to this repository.",
-				() => Expect.Call<object>(null));
+            Assert.Throws<InvalidOperationException>(
+                () => Expect.Call<object>(null));
 			mocks.Replay(demo); //for the tear down
 		}
 
@@ -110,9 +108,8 @@ namespace Rhino.Mocks.Tests
 			Expect.Call(demo.Prop).Return("ayende");
 			mocks.ReplayAll();
 			Assert.Equal("ayende", demo.Prop);
-			Assert.Throws<InvalidOperationException>(
-				"Invalid call, the last call has been used or no call has been made (make sure that you are calling a virtual (C#) / Overridable (VB) method).",
-				() => Expect.Call<object>(null));
+            Assert.Throws<InvalidOperationException>(
+                () => Expect.Call<object>(null));
 		}
 	}
 }

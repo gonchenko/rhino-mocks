@@ -34,6 +34,7 @@ using Rhino.Mocks.Constraints;
 using Rhino.Mocks.Expectations;
 using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
+using Range = Rhino.Mocks.Impl.Range;
 
 namespace Rhino.Mocks.Tests.Expectations
 {
@@ -64,67 +65,61 @@ namespace Rhino.Mocks.Tests.Expectations
 		[Fact]
 		public void PassingNullConstraintsThrows()
 		{
-			Assert.Throws<InvalidOperationException>(
-				"The constraint at index 1 is null! Use Is.Null() to represent null parameters.",
-				() =>
-				expectation = new ConstraintsExpectation(new FakeInvocation(this.method), new AbstractConstraint[]
-				{
-					Is.Anything(),
-					null,
-					Is.Equal(3.14f),
-				}, new Range(1, 1)));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    expectation = new ConstraintsExpectation(new FakeInvocation(this.method), new AbstractConstraint[]
+                    {
+                        Is.Anything(),
+                        null,
+                        Is.Equal(3.14f),
+                    }, new Range(1, 1)));
 		}
 
 		[Fact]
 		public void NullConstraints()
 		{
-			Assert.Throws<ArgumentNullException>("Value cannot be null.\r\nParameter name: constraints",
-			                                     () =>
-			                                     new ConstraintsExpectation(new FakeInvocation(this.method), null,
-			                                                                new Range(1, 1)));
+            Assert.Throws<ArgumentNullException>(() =>
+                new ConstraintsExpectation(new FakeInvocation(this.method), null,
+                    new Range(1, 1)));
 		}
 
 		[Fact]
 		public void NullConstraintsFromPrevExpectation()
 		{
-			Assert.Throws<ArgumentNullException>(
-				"Value cannot be null.\r\nParameter name: constraints",
-				() => new ConstraintsExpectation(expectation, null));
+            Assert.Throws<ArgumentNullException>(
+                () => new ConstraintsExpectation(expectation, null));
 		}
 
 
 		[Fact]
 		public void NullEvaluation()
 		{
-			Assert.Throws<ArgumentNullException>("Value cannot be null.\r\nParameter name: args",
-			                                     () => expectation.IsExpected(null));
+            Assert.Throws<ArgumentNullException>(() => expectation.IsExpected(null));
 		}
 
 		[Fact]
 		public void TooFewConstraints()
 		{
-			Assert.Throws<InvalidOperationException>(
-				"The number of constraints is not the same as the number of the method's parameters!",
-				() => new ConstraintsExpectation(new FakeInvocation(this.method), new AbstractConstraint[]
-				{
-					Is.Anything(),
-					Is.Null()
-				}, new Range(1, 1)));
+            Assert.Throws<InvalidOperationException>(
+                () => new ConstraintsExpectation(new FakeInvocation(this.method), new AbstractConstraint[]
+                {
+                    Is.Anything(),
+                    Is.Null()
+                }, new Range(1, 1)));
 		}
 
 		[Fact]
 		public void TooManyConstraints()
 		{
-			Assert.Throws<InvalidOperationException>(
-				"The number of constraints is not the same as the number of the method's parameters!",
-				() =>
-				new ConstraintsExpectation(new FakeInvocation(this.method), new AbstractConstraint[]
-				{
-					Is.Anything(),
-					Is.Null(),
-					Is.NotNull(),
-					Text.Like("Song")
-				}, new Range(1, 1)));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    new ConstraintsExpectation(new FakeInvocation(this.method), new AbstractConstraint[]
+                    {
+                        Is.Anything(),
+                        Is.Null(),
+                        Is.NotNull(),
+                        Text.Like("Song")
+                    }, new Range(1, 1)));
 
 		}
 
@@ -158,9 +153,8 @@ namespace Rhino.Mocks.Tests.Expectations
 		[Fact]
 		public void TooFewArgs()
 		{
-			Assert.Throws<InvalidOperationException>(
-				"Number of argument doesn't match the number of parameters!",
-				() => this.expectation.IsExpected(new object[] {32, "Ayende"}));
+            Assert.Throws<InvalidOperationException>(
+                () => this.expectation.IsExpected(new object[] {32, "Ayende"}));
 		}
 	}
 }

@@ -61,7 +61,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 		/// for KB 957542.
 		/// There is a bug in .Net 3.5 SP1 that this test exposes.
 		/// </summary>
-		[Fact]
+		[Fact(Skip = "There is some issue with executing this on Mono(expected) and on Windows GitHub action. https://github.com/gonchenko/rhino-mocks/issues/3")]
 		public void DoubleGeneric()
 		{
 			string clrInstallationDir = Path.GetDirectoryName(typeof(object).Assembly.Location);

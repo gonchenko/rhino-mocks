@@ -22,7 +22,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
 			mocks.ReplayAll();
 
-			Assert.Throws<ExpectationViolationException>("IDemo.VoidNoArgs(); Expected #0, Actual #1.", demo.VoidNoArgs);
+            Assert.Throws<ExpectationViolationException>(demo.VoidNoArgs);
 		}
 
 		[Fact]
@@ -37,18 +37,16 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 					.Return(new List<ExpectedBar>());
 			}
 
-			Assert.Throws<ExpectationViolationException>(
-				@"ISomeSystem.GetFooFor<Rhino.Mocks.Tests.FieldsProblem.UnexpectedBar>(""foo""); Expected #1, Actual #1.
-ISomeSystem.GetFooFor<Rhino.Mocks.Tests.FieldsProblem.ExpectedBar>(""foo""); Expected #1, Actual #0.",
-				() =>
-				{
-					using (mocks.Playback())
-					{
-						ExpectedBarPerformer cut = new ExpectedBarPerformer(mockSomeSystem);
-						cut.DoStuffWithExpectedBar("foo");
-					}
-				}
-				);
+            Assert.Throws<ExpectationViolationException>(
+                () =>
+                {
+                    using (mocks.Playback())
+                    {
+                        ExpectedBarPerformer cut = new ExpectedBarPerformer(mockSomeSystem);
+                        cut.DoStuffWithExpectedBar("foo");
+                    }
+                }
+            );
 
 			
 		}

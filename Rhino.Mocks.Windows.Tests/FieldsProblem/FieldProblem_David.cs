@@ -27,32 +27,50 @@
 #endregion
 
 
-using System;
-using System.Text;
+using System.Web.UI;
 using Xunit;
 
-namespace Rhino.Mocks.Tests
+namespace Rhino.Mocks.Tests.FieldsProblem
 {
     
-    public class UsingComObject
+    public class FieldProblem_David
     {
-        public interface IMockTest
-        {
-            Scripting.FileSystemObject GetFileSystemObject();
-        }
-        
         [Fact]
-        public void UsingScriptingFileSystem()
+        public void MockWebUIPageClass()
         {
             MockRepository mocks = new MockRepository();
-            Type fsoType = Type.GetTypeFromProgID("Scripting.FileSystemObject");
-            Scripting.FileSystemObject fso = (Scripting.FileSystemObject)Activator.CreateInstance(fsoType);
-            IMockTest test = mocks.StrictMock(typeof(IMockTest)) as IMockTest;
-            Expect.Call(test.GetFileSystemObject()).Return(fso);
+            Page page = (Page)mocks.StrictMock(typeof(Page));
+            page.Validate();
             mocks.ReplayAll();
-            Assert.Same(fso, test.GetFileSystemObject());
+            page.Validate();
             mocks.VerifyAll();
+        }
 
+        [Fact]
+        public void MockClassWithVirtualMethodCallFromConstructor()
+        {
+            MockRepository mocks = new MockRepository();
+            ClassWithVirtualMethodCallFromConstructor cwvmcfc = (ClassWithVirtualMethodCallFromConstructor)mocks.StrictMock(typeof(ClassWithVirtualMethodCallFromConstructor));
+            Assert.NotNull(cwvmcfc);
+            Expect.Call(cwvmcfc.ToString()).Return("Success");
+            mocks.ReplayAll();
+            Assert.Equal("Success", cwvmcfc.ToString());
+            mocks.VerifyAll();
+        }
+
+        public class ClassWithVirtualMethodCallFromConstructor
+        {
+            public ClassWithVirtualMethodCallFromConstructor()
+            {
+                VirtualCall();
+            }
+
+            public override string ToString()
+            {
+                return base.ToString();
+            }
+
+            public virtual void VirtualCall() { }
         }
     }
 }
