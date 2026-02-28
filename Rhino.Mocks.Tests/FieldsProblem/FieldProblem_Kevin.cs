@@ -54,7 +54,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 			mockRepository.VerifyAll();
 
 			Assert.Equal(mockedResult, result);
-			Assert.Equal(true, concreteProtectedMethodCalledFromCtor.WasAbstractMethodCalledFromCtor);
+			Assert.True(concreteProtectedMethodCalledFromCtor.WasAbstractMethodCalledFromCtor);
 		}
 
 		[Fact]
@@ -74,7 +74,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 			mockRepository.VerifyAll();
 
 			Assert.Equal(mockedResult, result);
-			Assert.Equal(true, concretePublicMethodCalledFromCtor.WasAbstractMethodCalledFromCtor);
+			Assert.True(concretePublicMethodCalledFromCtor.WasAbstractMethodCalledFromCtor);
 		}
 	}
 

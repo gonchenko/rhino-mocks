@@ -34,7 +34,7 @@ using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Impl;
 using Rhino.Mocks.Tests.Expectations;
 using Rhino.Mocks.Tests.Utilities;
-using Castle.Core.Interceptor;
+using Castle.DynamicProxy;
 
 namespace Rhino.Mocks.Tests.Impl
 {
@@ -61,7 +61,7 @@ namespace Rhino.Mocks.Tests.Impl
 		[Fact]
 		public void CreatingReplayMockStateFromRecordMockStateCopiesTheExpectationList()
 		{
-			Assert.Equal(1, Get.Recorder(mocks).GetAllExpectationsForProxy(proxy).Count);
+			Assert.Single(Get.Recorder(mocks).GetAllExpectationsForProxy(proxy));
 		}
 
 		[Fact]
@@ -115,7 +115,7 @@ namespace Rhino.Mocks.Tests.Impl
 			record.LastExpectation.ReturnValue = true;
 			record.MethodCall(new FakeInvocation(method), method, "y");
 			record.LastExpectation.ReturnValue = true;
-			record.LastExpectation.Expected = new Range(2, 2);
+			record.LastExpectation.Expected = new Rhino.Mocks.Impl.Range(2, 2);
 			ReplayMockState replay = new ReplayMockState(record);
 			try
 			{
@@ -141,7 +141,7 @@ namespace Rhino.Mocks.Tests.Impl
 				record.LastExpectation.ReturnValue = true;
                 record.MethodCall(new FakeInvocation(method), method, "y");
 				record.LastExpectation.ReturnValue = true;
-				record.LastExpectation.Expected = new Range(2, 2);
+				record.LastExpectation.Expected = new Rhino.Mocks.Impl.Range(2, 2);
 			}
 			ReplayMockState replay = new ReplayMockState(record);
 			try

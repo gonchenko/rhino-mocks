@@ -33,8 +33,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
-using Castle.Core.Interceptor;
 using Castle.DynamicProxy;
 using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Generated;
@@ -209,12 +209,13 @@ namespace Rhino.Mocks
         /// </summary>
         public MockRepository()
         {
+            var customAttribute = CustomAttributeInfo.FromExpression(() => new __ProtectAttribute());
             proxyGenerationOptions = new ProxyGenerationOptions
             {
-                AttributesToAddToGeneratedTypes = 
-                    {
-                        new __ProtectAttribute()
-                    }
+                AdditionalAttributes =
+                {
+                    customAttribute
+                }
             };
             recorders = new Stack();
             repeatableMethods = new ProxyMethodExpectationsDictionary();
@@ -794,7 +795,7 @@ namespace Rhino.Mocks
                 delegateTargetInterface,
                 types, proxyGenerationOptions, interceptor);
 
-            proxy = Delegate.CreateDelegate(type, target, delegateTargetInterface.Name+ ".Invoke");
+            proxy = Delegate.CreateDelegate(type, target, "Invoke");
             delegateProxies.Add(target, proxy);
 
             IMockState value = mockStateFactory(GetMockedObject(proxy));

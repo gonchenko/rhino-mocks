@@ -29,10 +29,16 @@
       <Reference Include="Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f">
         <HintPath>..\SharedLibs\Scripting.dll</HintPath>
       </Reference>
+      <Reference Include="System.Configuration" />
       <Reference Include="System.EnterpriseServices" />
+      <Reference Include="System.ServiceModel" />
+      <Reference Include="System.Web" />
+      <Reference Include="System.Web.ApplicationServices" />
+      <Reference Include="System.Windows.Forms" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Rhino.Mocks.Tests\Rhino.Mocks.Tests.csproj" />
       <ProjectReference Include="..\Rhino.Mocks\Rhino.Mocks.csproj" />
     </ItemGroup>
 

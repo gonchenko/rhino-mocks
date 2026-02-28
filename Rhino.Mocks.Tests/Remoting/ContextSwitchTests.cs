@@ -33,7 +33,6 @@ using System.Reflection;
 using System.Security.Permissions;
 using Xunit;
 using Rhino.Mocks.Exceptions;
-[assembly:EnvironmentPermission(SecurityAction.RequestMinimum)]
 
 
 namespace Rhino.Mocks.Tests.Remoting
@@ -54,9 +53,12 @@ namespace Rhino.Mocks.Tests.Remoting
 			FileInfo assemblyFile = new FileInfo(
 				Assembly.GetExecutingAssembly().Location);
 
+#if NETCOREAPP3_1 
+			otherDomain = AppDomain.CreateDomain("other domain");
+#else
 			otherDomain = AppDomain.CreateDomain("other domain", null,
 				AppDomain.CurrentDomain.BaseDirectory, null, false);
-
+#endif
 			contextSwitcher = (ContextSwitcher)otherDomain.CreateInstanceAndUnwrap(
 				Assembly.GetExecutingAssembly().GetName().Name,
 				typeof(ContextSwitcher).FullName);
@@ -137,7 +139,7 @@ namespace Rhino.Mocks.Tests.Remoting
 		}
 
 
-
+        [Fact(Skip = "Rider xUnit runner crashed on Mono 6.12.0.107")]
 		public void MockClassExpectException()
 		{
 			MockRepository mocks = new MockRepository();

@@ -35,6 +35,7 @@ using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
 using Rhino.Mocks.Generated;
 using Rhino.Mocks.Tests.Expectations;
+using Range = Rhino.Mocks.Impl.Range;
 
 namespace Rhino.Mocks.Tests.MethodRecorders
 {
@@ -90,7 +91,7 @@ namespace Rhino.Mocks.Tests.MethodRecorders
 			ExpectationsList expectations = recorder.GetAllExpectationsForProxyAndMethod(demo, voidNoArgs);
 			Assert.Equal(2, expectations.Count);
 			expectations = recorder.GetAllExpectationsForProxyAndMethod(demo, voidThreeArgs);
-			Assert.Equal(1, expectations.Count);
+			Assert.Single(expectations);
 		}
 
 		[Fact]

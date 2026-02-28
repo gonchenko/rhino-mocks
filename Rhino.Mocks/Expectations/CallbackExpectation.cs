@@ -30,7 +30,7 @@
 using System;
 using System.Reflection;
 using System.Text;
-using Castle.Core.Interceptor;
+using Castle.DynamicProxy;
 using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
 
@@ -60,7 +60,7 @@ namespace Rhino.Mocks.Expectations
 		/// <param name="invocation">Invocation for this expectation</param>
 		/// <param name="callback">Callback.</param>
 		/// <param name="expectedRange">Number of method calls for this expectations</param>
-		public CallbackExpectation(IInvocation invocation, Delegate callback, Range expectedRange) : base(invocation, expectedRange)
+		public CallbackExpectation(IInvocation invocation, Delegate callback, Impl.Range expectedRange) : base(invocation, expectedRange)
 		{
 			this.callback = callback;
 			ValidateCallback();

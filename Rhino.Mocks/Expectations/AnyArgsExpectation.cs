@@ -29,7 +29,7 @@
 
 using System;
 using System.Reflection;
-using Castle.Core.Interceptor;
+using Castle.DynamicProxy;
 using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
 using Rhino.Mocks.Utilities;
@@ -46,7 +46,7 @@ namespace Rhino.Mocks.Expectations
 		/// </summary>
 		/// <param name="invocation">Invocation for this expectation</param>
         /// <param name="expectedRange">Number of method calls for this expectations</param>
-        public AnyArgsExpectation(IInvocation invocation, Range expectedRange) : base(invocation, expectedRange)
+        public AnyArgsExpectation(IInvocation invocation, Impl.Range expectedRange) : base(invocation, expectedRange)
 		{
 		}
 
