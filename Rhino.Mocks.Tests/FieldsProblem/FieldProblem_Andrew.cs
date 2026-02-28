@@ -9,7 +9,6 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 	
 	public class FieldProblem_Andrew
 	{
-#if DOTNET35
 		[Fact]
 		public void Will_get_unexpect_error()
 		{
@@ -31,7 +30,6 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
             Assert.Throws<ExpectationViolationException>(() => mockCommand.VerifyAllExpectations());
 		}
-#endif
 	}
 
 	public class TestException : Exception

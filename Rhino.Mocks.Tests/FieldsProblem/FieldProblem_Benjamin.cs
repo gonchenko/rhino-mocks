@@ -1,4 +1,3 @@
-#if DOTNET35
 using Xunit;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
@@ -7,7 +6,6 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 	
 	public class FieldProblem_Benjamin
 	{
-#if DOTNET35 
 		[Fact]
         public void ThisTestPasses()
         {
@@ -30,7 +28,6 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
             Assert.Equal(4, myInterface.MyIntValue);
         }
-#endif
 	}
 
 	public interface InterfaceINeedToStub
@@ -39,4 +36,3 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 		string MyStringValue { get; }
 	}
 }
-#endif
