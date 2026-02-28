@@ -27,20 +27,19 @@ namespace Rhino.Mocks.Impl.RemotingMock
         /// See IRemotingProxyOperation for more details</remarks>
         public static bool IsRemotingProxy(object obj)
         {
-            return false;
+            throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
         }
 
         /// <summary>
         /// Retrieve a mocked object from a transparent proxy
         /// </summary>
         /// <param name="proxy">Transparent proxy with a RemotingProxy instance behind it</param>
-        /// <returns>Always returns null on .NET Core since remoting proxies do not exist; this method is
-        /// only called when <see cref="IsRemotingProxy"/> returns true, which never occurs on .NET Core.</returns>
+        /// <returns>Mocked object associated with the proxy</returns>
         /// <remarks>We use Equals() method to communicate with the real proxy behind the object.
         /// See IRemotingProxyOperation for more details</remarks>
         public static IMockedObject GetMockedObjectFromProxy(object proxy)
         {
-            return null;
+            throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
         }
     }
 #else
