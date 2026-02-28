@@ -31,7 +31,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Build the code
-        run: dotnet build
+        run: dotnet build --configuration Release
 
       - name: Test the code
-        run: dotnet test --no-build
+        run: dotnet test --no-build --configuration Release
