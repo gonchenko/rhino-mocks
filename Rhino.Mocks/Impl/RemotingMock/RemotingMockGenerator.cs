@@ -7,7 +7,7 @@ namespace Rhino.Mocks.Impl.RemotingMock
     /// <summary>
     /// Generates remoting proxies and provides utility functions
     /// </summary>
-#if NETCOREAPP3_1
+#if !NETFRAMEWORK
     internal class RemotingMockGenerator
     {
         ///<summary>
@@ -15,6 +15,7 @@ namespace Rhino.Mocks.Impl.RemotingMock
         ///</summary>
         public object CreateRemotingMock(Type type, IInterceptor interceptor, IMockedObject mockedObject)
         {
+            // Remoting unavailable on Core; caller should avoid invoking this method.
             throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
         }
 
@@ -23,23 +24,22 @@ namespace Rhino.Mocks.Impl.RemotingMock
         /// </summary>
         /// <param name="obj">Object to check</param>
         /// <returns>true if the object is a transparent proxy with a RemotingProxy instance behind it, false otherwise</returns>
-        /// <remarks>We use Equals() method to communicate with the real proxy behind the object.
-        /// See IRemotingProxyOperation for more details</remarks>
+        /// <remarks>This is called from various helpers; on Core we simply report false rather than throw.</remarks>
         public static bool IsRemotingProxy(object obj)
         {
-            throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
+            // never treat anything as a remoting proxy on Core
+            return false;
         }
 
         /// <summary>
         /// Retrieve a mocked object from a transparent proxy
         /// </summary>
         /// <param name="proxy">Transparent proxy with a RemotingProxy instance behind it</param>
-        /// <returns>Mocked object associated with the proxy</returns>
-        /// <remarks>We use Equals() method to communicate with the real proxy behind the object.
-        /// See IRemotingProxyOperation for more details</remarks>
+        /// <returns>Mocked object associated with the proxy, or null</returns>
         public static IMockedObject GetMockedObjectFromProxy(object proxy)
         {
-            throw new PlatformNotSupportedException("Remoting is not supported on .NET Core");
+            // no remoting proxies exist
+            return null;
         }
     }
 #else

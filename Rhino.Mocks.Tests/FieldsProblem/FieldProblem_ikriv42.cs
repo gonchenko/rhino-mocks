@@ -4,6 +4,7 @@ using Xunit;
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
     
+#if NETFRAMEWORK
     public class FieldProblem_ikriv42
     {
         public class D : MarshalByRefObject
@@ -25,4 +26,5 @@ namespace Rhino.Mocks.Tests.FieldsProblem
             MockRepository.GenerateStub<D>();
         }
     }
+#endif
 }
