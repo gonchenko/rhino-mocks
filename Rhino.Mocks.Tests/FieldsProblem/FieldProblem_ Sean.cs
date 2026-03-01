@@ -1,4 +1,3 @@
-using System.Security.Permissions;
 using Xunit;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
@@ -30,7 +29,6 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
 	public interface IEmployeeRepository
 	{
-		[EnvironmentPermission(SecurityAction.LinkDemand)]
 		IEmployee GetEmployeeDetails(string username);
 	}
 
