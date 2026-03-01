@@ -206,6 +206,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 			raiser.Raise(this, EventArgs.Empty);
 		}
 
+#if DOTNET35
 		
         [Fact]
         public void RaiseEventUsingExtensionMethod() 
@@ -241,6 +242,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
             Assert.True(called);
 		}
+#endif
 
 	}
 
