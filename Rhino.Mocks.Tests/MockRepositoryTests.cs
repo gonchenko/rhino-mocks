@@ -580,9 +580,7 @@ namespace Rhino.Mocks.Tests
 		{
             IDemo mock = MockRepository.GenerateStrictMockWithRemoting<IDemo>();
 			Assert.NotNull(mock);
-#if DOTNET35
 			Assert.True(mock.GetMockRepository().IsInReplayMode(mock));
-#endif
 		}
 #endif
 
@@ -592,9 +590,7 @@ namespace Rhino.Mocks.Tests
 		{
             IDemo mock = MockRepository.GenerateDynamicMockWithRemoting<IDemo>();
 			Assert.NotNull(mock);
-#if DOTNET35
 			Assert.True(mock.GetMockRepository().IsInReplayMode(mock));
-#endif
         }
 #endif
 

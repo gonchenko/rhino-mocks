@@ -1,4 +1,3 @@
-#if DOTNET35
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
 	using System;
@@ -14,4 +13,3 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 		}
 	}
 }
-#endif
