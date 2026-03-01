@@ -56,8 +56,10 @@ namespace Rhino.Mocks.Exceptions
 		/// <summary>
 		/// Serialization constructor
 		/// </summary>
+#pragma warning disable SYSLIB0051
 		protected ExpectationViolationException(SerializationInfo info, StreamingContext context)
         :base(info,context){} 
+#pragma warning restore SYSLIB0051
 
 		#endregion
 	}
