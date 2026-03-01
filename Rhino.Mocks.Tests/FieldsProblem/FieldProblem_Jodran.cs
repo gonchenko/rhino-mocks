@@ -26,6 +26,7 @@
 // THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
+#if DOTNET35
 
 using Xunit;
 using Rhino.Mocks.Exceptions;
@@ -150,3 +151,4 @@ namespace Rhino.Mocks.Tests.FieldsProblem
         }
 	}
 }
+#endif

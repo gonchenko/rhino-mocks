@@ -26,7 +26,7 @@
 // THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-#if NETFRAMEWORK
+#if DOTNET35
 using System;
 using System.Collections.Generic;
 using Rhino.Mocks.Exceptions;
@@ -484,6 +484,44 @@ namespace Rhino.Mocks
 		}
 
 		#endregion
+
+        internal static IMockedObject AsMockObject(this object mockedInstance)
+        {
+            IMockedObject mockedObj = mockedInstance.AsMockObjectOrNull();
+            if (mockedObj == null)
+                throw new InvalidOperationException("The object '" + mockedInstance +
+                                                    "' is not a mocked object.");
+            return mockedObj;
+        }
+
+        /// <summary>
+        /// Method: GetMockedObjectOrNull
+        /// Get an IProxy from a mocked object instance, or null if the
+        /// object is not a mock object.
+        /// </summary>
+        internal static IMockedObject AsMockObjectOrNull(this object mockedInstance)
+        {
+            Delegate mockedDelegate = mockedInstance as Delegate;
+
+            if (mockedDelegate != null)
+            {
+                mockedInstance = mockedDelegate.Target;
+            }
+
+            // must be careful not to call any methods on mocked objects,
+            // or it may cause infinite recursion
+            if (mockedInstance is IMockedObject)
+            {
+                return (IMockedObject)mockedInstance;
+            }
+
+            if (RemotingMockGenerator.IsRemotingProxy(mockedInstance))
+            {
+                return RemotingMockGenerator.GetMockedObjectFromProxy(mockedInstance);
+            }
+
+            return null;
+        }
 
 
 	}
