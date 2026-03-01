@@ -30,13 +30,16 @@
 using System;
 using System.Runtime.InteropServices;
 using Xunit;
+#if NETFRAMEWORK
 using MSHTML;
+#endif
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
 	
 	public class FieldProblem_Luke
 	{
+#if NETFRAMEWORK
 		[Fact]
 		public void CanMockIE()
 		{
@@ -53,6 +56,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 											   mocks.StrictMultiMock(typeof(IServiceProvider), typeof(IHTMLDataTransfer));
 			Assert.NotNull(serviceProvider);
 		}
+#endif
 
 		[Fact] 
 		public void TryToMockClassWithProtectedInternalAbstractClass()

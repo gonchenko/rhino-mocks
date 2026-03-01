@@ -530,12 +530,18 @@ namespace Rhino.Mocks
         /// <param name="factory">Creates the mock state for this proxy</param>
         private object RemotingMock(Type type, CreateMockState factory)
         {
+#if NETFRAMEWORK
             ProxyInstance rhinoProxy = new ProxyInstance(this, type);
             RhinoInterceptor interceptor = new RhinoInterceptor(this, rhinoProxy,invocationVisitorsFactory.CreateStandardInvocationVisitors(rhinoProxy, this));
             object transparentProxy = new RemotingMockGenerator().CreateRemotingMock(type, interceptor, rhinoProxy);
             IMockState value = factory(rhinoProxy);
             proxies.Add(transparentProxy, value);
             return transparentProxy;
+#else
+            // On non-.NET Framework we can't use remoting; fall back to normal proxy
+            // CreateMockObject will handle adding to proxies internally.
+            return CreateMockObject(type, factory, new Type[0]);
+#endif
         }
 
         /// <summary>

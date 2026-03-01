@@ -38,6 +38,7 @@ using Rhino.Mocks.Exceptions;
 namespace Rhino.Mocks.Tests.Remoting
 {
 
+#if NET48
 	/// <summary>
 	/// Test scenarios where mock objects are called from different
 	/// application domain.
@@ -53,7 +54,7 @@ namespace Rhino.Mocks.Tests.Remoting
 			FileInfo assemblyFile = new FileInfo(
 				Assembly.GetExecutingAssembly().Location);
 
-#if NETCOREAPP3_1 
+#if !NET48 
 			otherDomain = AppDomain.CreateDomain("other domain");
 #else
 			otherDomain = AppDomain.CreateDomain("other domain", null,
@@ -162,5 +163,6 @@ namespace Rhino.Mocks.Tests.Remoting
                 () => contextSwitcher.DoStuff(demo));
 		}
 	}
+#endif
 
 }

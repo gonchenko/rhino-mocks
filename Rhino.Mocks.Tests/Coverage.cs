@@ -53,6 +53,7 @@ namespace Rhino.Mocks.Tests
 	public class Coverage
 	{
 			
+#if !NET8_0
 		[Fact]
 		public void CanSerializeObjectNotMockObjectFromThisRepostiory()
 		{
@@ -60,6 +61,7 @@ namespace Rhino.Mocks.Tests
 			ObjectNotMockFromThisRepositoryException other = (ObjectNotMockFromThisRepositoryException)SerializeAndDeserialize(e);
 			Assert.Equal("ff", other.Message );
 		}
+#endif
 
 		[Fact]
 		public void CanTestConstaintForTruth()
@@ -168,6 +170,7 @@ namespace Rhino.Mocks.Tests
 		}
 
 
+#if !NET8_0
 		public static object SerializeAndDeserialize(object proxy)
 		{
 			MemoryStream stream = new MemoryStream();
@@ -176,6 +179,7 @@ namespace Rhino.Mocks.Tests
 			stream.Position = 0;
 			return formatter.Deserialize(stream);
 		}
+#endif
 
 	}
 }

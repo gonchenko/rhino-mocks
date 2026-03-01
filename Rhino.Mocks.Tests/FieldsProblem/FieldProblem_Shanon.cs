@@ -1,9 +1,11 @@
 using Xunit;
+#if NETFRAMEWORK
 using RhinoMocksCPPInterfaces;
+#endif
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
-	
+#if NETFRAMEWORK
 	public class FieldProblem_Shanon
 	{
 		[Fact(Skip =  @"Updating the Castle and NH assmeblies causes this to fail.
@@ -35,4 +37,5 @@ StackTrace:
 			Assert.NotNull(mock);
 		}
 	}
+#endif
 }

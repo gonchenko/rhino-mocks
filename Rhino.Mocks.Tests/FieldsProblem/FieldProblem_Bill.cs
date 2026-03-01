@@ -1,9 +1,11 @@
 ﻿using Xunit;
+#if NETFRAMEWORK
 using Microsoft.Practices.Unity;
+#endif
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
-    
+#if NETFRAMEWORK
     public class FieldProblem_Bill
     {
         /// <summary>
@@ -16,4 +18,5 @@ namespace Rhino.Mocks.Tests.FieldsProblem
             var unity = MockRepository.GenerateMock<IUnityContainer>();
         }
     }
+#endif
 }

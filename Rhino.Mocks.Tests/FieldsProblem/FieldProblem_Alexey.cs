@@ -22,6 +22,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 	}
 
 	
+#if NETFRAMEWORK
 	public class FieldProblem_Alexey
 	{
 		[Fact]
@@ -80,4 +81,5 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 			mockery.VerifyAll();
 		}
 	}
+#endif
 }
