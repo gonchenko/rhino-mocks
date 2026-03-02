@@ -28,7 +28,9 @@
 
 
 using System;
+#if NETFRAMEWORK
 using System.Runtime.Serialization;
+#endif
 
 namespace Rhino.Mocks.Exceptions
 {
@@ -57,10 +59,10 @@ namespace Rhino.Mocks.Exceptions
 		/// <summary>
 		/// Serialization constructor
 		/// </summary>
-#pragma warning disable SYSLIB0051
+#if NETFRAMEWORK
 		protected ObjectNotMockFromThisRepositoryException(SerializationInfo info, StreamingContext context)
         :base(info,context){} 
-#pragma warning restore SYSLIB0051
+#endif
 
 		#endregion
 	}

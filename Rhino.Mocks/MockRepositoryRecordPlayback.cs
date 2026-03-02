@@ -58,9 +58,7 @@ namespace Rhino.Mocks
 			if (t == null)
 			{
 				// Probably running the .NET Framework
-#pragma warning disable CS0618
 				if (Marshal.GetExceptionCode() != 0)
-#pragma warning restore CS0618
 				{
 					return true;
 				}

@@ -1,3 +1,6 @@
+#if NETFRAMEWORK
+using System.Security.Permissions;
+#endif
 using Xunit;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
@@ -29,6 +32,9 @@ namespace Rhino.Mocks.Tests.FieldsProblem
 
 	public interface IEmployeeRepository
 	{
+#if NETFRAMEWORK
+		[EnvironmentPermission(SecurityAction.LinkDemand)]
+#endif
 		IEmployee GetEmployeeDetails(string username);
 	}
 
