@@ -28,7 +28,9 @@
 
 
 using System;
+#if NETFRAMEWORK
 using System.Runtime.Serialization;
+#endif
 
 namespace Rhino.Mocks.Exceptions
 {
@@ -56,8 +58,10 @@ namespace Rhino.Mocks.Exceptions
 		/// <summary>
 		/// Serialization constructor
 		/// </summary>
+#if NETFRAMEWORK
 		protected ExpectationViolationException(SerializationInfo info, StreamingContext context)
         :base(info,context){} 
+#endif
 
 		#endregion
 	}

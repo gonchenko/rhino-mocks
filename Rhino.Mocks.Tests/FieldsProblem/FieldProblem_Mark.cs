@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using Xunit;
 
+#pragma warning disable CA1416
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
 	
