@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Reflection;
@@ -126,7 +127,7 @@ namespace Rhino.Mocks
         /// <summary>
         /// This is a map of types to ProxyGenerators.
         /// </summary>
-        private static readonly IDictionary<Type, ProxyGenerator> generatorMap = new Dictionary<Type, ProxyGenerator>();
+        private static readonly ConcurrentDictionary<Type, ProxyGenerator> generatorMap = new ConcurrentDictionary<Type, ProxyGenerator>();
 
         /*
          * Variable: lastRepository
@@ -138,6 +139,7 @@ namespace Rhino.Mocks
         /// <summary>
         /// This is used to record the last repository that has a method called on it.
         /// </summary>
+        [ThreadStatic]
         internal static MockRepository lastRepository;
 
         /*
@@ -1034,12 +1036,7 @@ namespace Rhino.Mocks
         /// </summary>
         protected virtual ProxyGenerator GetProxyGenerator(Type type)
         {
-            if (!generatorMap.ContainsKey(type))
-            {
-                generatorMap[type] = new ProxyGenerator();
-            }
-
-            return generatorMap[type];
+            return generatorMap.GetOrAdd(type, t => new ProxyGenerator());
         }
 
 
