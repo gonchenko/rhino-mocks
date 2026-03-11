@@ -21,7 +21,7 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
 
     <!--
-      Propagate IDE code-style analysers (IDExxxx) to `dotnet build` output so
+      Propagate IDE code-style analyzers (IDExxxx) to `dotnet build` output so
       all rules are visible in CI, not just inside the IDE.
       Only rules explicitly set to 'error' in .editorconfig will fail the build.
     -->
