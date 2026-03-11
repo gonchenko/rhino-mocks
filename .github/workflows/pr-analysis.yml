@@ -44,7 +44,9 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          # global.json pins the exact SDK patch so dotnet format (built-in
+          # to the SDK since .NET 6) always runs at the same version.
+          global-json-file: global.json
 
       - name: Restore
         run: dotnet restore
@@ -82,7 +84,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          global-json-file: global.json
 
       - name: Restore
         run: dotnet restore
@@ -118,7 +120,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          global-json-file: global.json
 
       - name: Restore
         run: dotnet restore
