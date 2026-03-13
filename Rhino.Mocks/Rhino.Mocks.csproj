@@ -3,9 +3,26 @@
   <PropertyGroup>
     <Version>4.0.0</Version>
     <VersionSuffix>alpha</VersionSuffix>
+    <PackageId>Rhino.Mocks.Light</PackageId>
+    <Authors>Ayende Rahien and contributors</Authors>
+    <Description>Dynamic mock object framework for .NET.</Description>
+    <PackageTags>mocking;testing;unit-testing;tdd</PackageTags>
+    <PackageProjectUrl>https://github.com/gonchenko/rhino-mocks</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/gonchenko/rhino-mocks</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\ayende-open-source.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworks>net461;net48;net8.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -22,6 +39,12 @@
   <ItemGroup>
     <None Include="..\ayende-open-source.snk">
       <Link>ayende-open-source.snk</Link>
+    </None>
+    <None Include="..\readme.md" Pack="true" PackagePath="\">
+      <Link>readme.md</Link>
+    </None>
+    <None Include="..\license.txt" Pack="true" PackagePath="\">
+      <Link>license.txt</Link>
     </None>
   </ItemGroup>
 
@@ -40,6 +63,7 @@
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.3.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
   
   
