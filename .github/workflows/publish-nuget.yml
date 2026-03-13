@@ -1,0 +1,53 @@
+name: Publish NuGet
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Determine package version
+        id: version
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          if [[ -z "$version" || "$version" == "$GITHUB_REF_NAME" ]]; then
+            echo "Tag name must start with 'v', for example v4.0.1." >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Restore
+        run: dotnet restore Rhino.Mocks/Rhino.Mocks.csproj
+
+      - name: Build
+        run: dotnet build Rhino.Mocks/Rhino.Mocks.csproj -c Release --no-restore
+
+      - name: Test
+        run: dotnet test -c Release --no-build
+
+      - name: Pack
+        run: dotnet pack Rhino.Mocks/Rhino.Mocks.csproj -c Release -o artifacts --no-build /p:Version=${{ steps.version.outputs.version }}
+
+      - name: Push package with Trusted Publishing
+        run: dotnet nuget push "artifacts/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Push symbols with Trusted Publishing
+        run: dotnet nuget push "artifacts/*.snupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
