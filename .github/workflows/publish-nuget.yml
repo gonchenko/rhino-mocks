@@ -48,16 +48,29 @@ jobs:
       - name: Pack
         run: dotnet pack Rhino.Mocks/Rhino.Mocks.csproj -c Release -o artifacts --no-build /p:Version=${{ steps.version.outputs.version }}
 
-      - name: Push package with Trusted Publishing
+      - name: Get NuGet token (Trusted Publishing)
+        id: nuget-token
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const token = await core.getIDToken('api://AzureADTokenExchange')
+            core.setSecret(token)
+            core.setOutput('token', token)
+
+      - name: Push package
         shell: pwsh
+        env:
+          NUGET_TOKEN: ${{ steps.nuget-token.outputs.token }}
         run: |
           Get-ChildItem -Path artifacts -Filter *.nupkg | ForEach-Object {
-            dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --skip-duplicate
+            dotnet nuget push $_.FullName --api-key "$env:NUGET_TOKEN" --source https://api.nuget.org/v3/index.json --skip-duplicate
           }
 
-      - name: Push symbols with Trusted Publishing
+      - name: Push symbols
         shell: pwsh
+        env:
+          NUGET_TOKEN: ${{ steps.nuget-token.outputs.token }}
         run: |
           Get-ChildItem -Path artifacts -Filter *.snupkg | ForEach-Object {
-            dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --skip-duplicate
+            dotnet nuget push $_.FullName --api-key "$env:NUGET_TOKEN" --source https://api.nuget.org/v3/index.json --skip-duplicate
           }
