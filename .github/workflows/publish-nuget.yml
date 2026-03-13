@@ -47,7 +47,15 @@ jobs:
         run: dotnet pack Rhino.Mocks/Rhino.Mocks.csproj -c Release -o artifacts --no-build /p:Version=${{ steps.version.outputs.version }}
 
       - name: Push package with Trusted Publishing
-        run: dotnet nuget push "artifacts/*.nupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path artifacts -Filter *.nupkg | ForEach-Object {
+            dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --skip-duplicate
+          }
 
       - name: Push symbols with Trusted Publishing
-        run: dotnet nuget push "artifacts/*.snupkg" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path artifacts -Filter *.snupkg | ForEach-Object {
+            dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --skip-duplicate
+          }
