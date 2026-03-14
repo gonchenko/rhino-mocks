@@ -1,0 +1,136 @@
+# PR Analysis
+#
+# Three-stage pipeline, executed only on pull requests targeting master:
+#
+#   lint     – dotnet format: whitespace/indentation (fastest, fail-fast feedback)
+#   analyze  – Roslyn analysers per TFM: severities from .editorconfig;
+#              Directory.Build.props promotes migration SYSLIBs to errors on net8.0
+#   test     – per-TFM test run (only the cross-platform test project)
+#
+# The existing main.yml continues to run the full solution build + test on
+# push and PR; this workflow adds fine-grained, per-TFM visibility.
+
+name: PR Analysis
+
+on:
+  pull_request:
+    branches: [ master ]
+
+# Read-only checkout is sufficient; no publishing or package pushing occurs.
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO:                    'true'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT:      'true'
+
+jobs:
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 1 – Formatting
+  #
+  # dotnet format verifies whitespace and indentation rules from .editorconfig.
+  # Runs first because it is the quickest check and surfaces trivial style
+  # issues before spending time on compilation.
+  # ──────────────────────────────────────────────────────────────────────────
+  lint:
+    name: Formatting
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          # global.json pins the exact SDK patch so dotnet format (built-in
+          # to the SDK since .NET 6) always runs at the same version.
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Verify formatting
+        # Exits with a non-zero code if any file would be modified by the formatter.
+        # Fix locally with: dotnet format
+        run: dotnet format --verify-no-changes --no-restore
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 2 – Roslyn Analyzer enforcement (matrix: net48 | net8.0)
+  #
+  # Builds only the library and the cross-platform test project so the matrix
+  # can target each TFM independently.  Windows.Tests (net48-only) and
+  # GettingStarted are validated by the existing main.yml full-solution build.
+  #
+  # Diagnostic promotion rules:
+  #   .editorconfig         – base severity for every diagnostic
+  #   Directory.Build.props – SYSLIB0011/0003/0015/0051 → error on net8.0
+  #                         – CA2300-CA2302, CA2350-CA2352 → error on all TFMs
+  # ──────────────────────────────────────────────────────────────────────────
+  analyze:
+    name: Analyzers / ${{ matrix.tfm }}
+    runs-on: windows-latest
+    needs: lint
+
+    strategy:
+      fail-fast: false   # report issues for both TFMs even when one fails
+      matrix:
+        tfm: [net48, net8.0]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      # Building the test project also builds Rhino.Mocks (via ProjectReference),
+      # so a single command covers both the library and the test assembly.
+      - name: Build – ${{ matrix.tfm }}
+        run: >
+          dotnet build Rhino.Mocks.Tests/Rhino.Mocks.Tests.csproj
+          -f ${{ matrix.tfm }}
+          --no-restore
+          --configuration Release
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 3 – Tests (matrix: net48 | net8.0)
+  #
+  # Runs only after the analyser job passes so test failures are not mixed
+  # with (and obscure) analyser noise.
+  # ──────────────────────────────────────────────────────────────────────────
+  test:
+    name: Tests / ${{ matrix.tfm }}
+    runs-on: windows-latest
+    needs: analyze
+
+    strategy:
+      fail-fast: false
+      matrix:
+        tfm: [net48, net8.0]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Test – ${{ matrix.tfm }}
+        run: >
+          dotnet test Rhino.Mocks.Tests/Rhino.Mocks.Tests.csproj
+          -f ${{ matrix.tfm }}
+          --no-build
+          --configuration Release

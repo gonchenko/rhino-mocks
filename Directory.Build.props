@@ -1,0 +1,62 @@
+<Project>
+  <!--
+    Applied only to SDK-style projects.  Old non-SDK projects (e.g. the legacy
+    GettingStarted/Documentation sub-projects) also import this file via MSBuild
+    directory traversal, so gate every setting on UsingMicrosoftNETSdk.
+  -->
+
+  <!-- ── Roslyn analyzer infrastructure ──────────────────────────────────── -->
+  <PropertyGroup Condition="'$(UsingMicrosoftNETSdk)' == 'true'">
+    <!--
+      EnableNETAnalyzers: ON for every TFM.
+      Default is already true for net5+, but setting it explicitly ensures
+      net461/net48 builds also surface migration diagnostics.
+    -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+
+    <!--
+      latest-recommended: picks up new rules as the SDK is updated without
+      opting into preview / experimental rules.
+    -->
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+
+    <!--
+      Propagate IDE code-style analyzers (IDExxxx) to `dotnet build` output so
+      all rules are visible in CI, not just inside the IDE.
+      Only rules explicitly set to 'error' in .editorconfig will fail the build.
+    -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <!-- ── Security hard-stops (ALL TFMs) ───────────────────────────────────
+       DataSet/DataTable round-trip deserialization is dangerous on every
+       target framework.  BinaryFormatter rules (CA2300-CA2302) are handled
+       in the net8.0-only block below so that the net48 build is not broken
+       by the legacy test-coverage code that is already guarded with
+       #if !NET8_0 in Rhino.Mocks.Tests/Coverage.cs.
+  -->
+  <PropertyGroup Condition="'$(UsingMicrosoftNETSdk)' == 'true'">
+    <WarningsAsErrors>$(WarningsAsErrors);CA2350;CA2351;CA2352</WarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- ── Migration hard-stops (net8.0 only) ───────────────────────────────
+       Promote SYSLIB removal/deprecation diagnostics to errors only for the
+       TFM where the APIs are actually gone or inoperative at runtime.
+       The same diagnostics remain warnings when building for net461/net48,
+       so they are visible without breaking the Framework builds.
+
+       SYSLIB0011 – BinaryFormatter is disabled by default in .NET 8
+       SYSLIB0003 – Code Access Security (CAS) calls are no-ops → silent bugs
+       SYSLIB0015 – Assembly.ReflectionOnlyLoad removed; use MetadataLoadContext
+       SYSLIB0051 – AppDomain.CreateDomain removed
+
+       CA2300/CA2301/CA2302 – BinaryFormatter deserialization rules promoted to
+       errors here.  On net48 they remain warnings (see .editorconfig), which
+       allows the legacy test in Coverage.cs (guarded with #if !NET8_0) to build
+       without error.  The guard ensures no BinaryFormatter code is compiled on
+       net8.0, so the error never fires in the test project either.
+  -->
+  <PropertyGroup Condition="'$(UsingMicrosoftNETSdk)' == 'true' and '$(TargetFramework)' == 'net8.0'">
+    <WarningsAsErrors>$(WarningsAsErrors);SYSLIB0011;SYSLIB0003;SYSLIB0015;SYSLIB0051;CA2300;CA2301;CA2302</WarningsAsErrors>
+  </PropertyGroup>
+</Project>
