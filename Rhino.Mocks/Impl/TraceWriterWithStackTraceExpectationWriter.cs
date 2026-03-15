@@ -1,5 +1,3 @@
-using System;
-
 namespace Rhino.Mocks.Impl
 {
 	using System.Diagnostics;

@@ -32,7 +32,6 @@ using Xunit;
 using Rhino.Mocks.Constraints;
 using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Interfaces;
-using Rhino.Mocks.Tests.Callbacks;
 
 namespace Rhino.Mocks.Tests
 {

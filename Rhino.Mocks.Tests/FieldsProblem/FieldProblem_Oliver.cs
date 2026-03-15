@@ -1,4 +1,3 @@
-using System.Reflection;
 using Xunit;
 
 namespace Rhino.Mocks.Tests.FieldsProblem

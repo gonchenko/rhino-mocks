@@ -27,8 +27,6 @@
 #endregion
 
 using System;
-using System.ComponentModel;
-using System.Text;
 
 namespace Rhino.Mocks.Constraints
 {

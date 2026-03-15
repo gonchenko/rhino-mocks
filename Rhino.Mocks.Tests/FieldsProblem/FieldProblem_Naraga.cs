@@ -1,7 +1,6 @@
 #if DOTNET35
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
-	using System;
 	using System.Threading;
 	using Xunit;
 

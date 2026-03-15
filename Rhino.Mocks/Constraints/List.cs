@@ -28,7 +28,6 @@
 
 
 using System.Collections;
-using Rhino.Mocks.Constraints;
 
 namespace Rhino.Mocks.Constraints
 {

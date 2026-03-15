@@ -1,6 +1,5 @@
 using Xunit;
 using Rhino.Mocks.Exceptions;
-using Rhino.Mocks.Interfaces;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {

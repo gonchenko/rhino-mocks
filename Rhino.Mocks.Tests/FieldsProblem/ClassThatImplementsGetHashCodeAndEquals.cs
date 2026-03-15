@@ -28,8 +28,6 @@
 
 
 using System;
-using System.Data;
-using System.Text;
 using Xunit;
 
 namespace Rhino.Mocks.Tests.FieldsProblem

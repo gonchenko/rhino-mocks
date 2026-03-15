@@ -3,7 +3,6 @@ using Xunit;
 
 namespace Rhino.Mocks.Tests
 {
-	using System;
 	using Exceptions;
 
 	
