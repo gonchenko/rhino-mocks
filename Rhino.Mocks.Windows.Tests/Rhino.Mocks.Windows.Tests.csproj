@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net48</TargetFramework>
+        <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
 
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -25,16 +25,33 @@
       </Compile>
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f">
-        <HintPath>..\SharedLibs\Scripting.dll</HintPath>
-      </Reference>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
       <Reference Include="System.Configuration" />
       <Reference Include="System.EnterpriseServices" />
       <Reference Include="System.ServiceModel" />
       <Reference Include="System.Web" />
       <Reference Include="System.Web.ApplicationServices" />
       <Reference Include="System.Windows.Forms" />
+    </ItemGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+      <UseWindowsForms>true</UseWindowsForms>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+      <!-- EnterpriseServices, System.Web.*, WCF server-side, and WCF exception types are not available on .NET 8 -->
+      <Compile Remove="RhinoMockWindowsTests.cs" />
+      <Compile Remove="FieldsProblem\FieldProblem_Bruno.cs" />
+      <Compile Remove="FieldsProblem\FieldProblem_David.cs" />
+      <Compile Remove="FieldsProblem\FieldProblem_StevenS.cs" />
+      <Compile Remove="FieldsProblem\FieldProblem_Will.cs" />
+    </ItemGroup>
+
+    <!-- Scripting COM interop: used by UsingComObject.cs; COM is supported on Windows for both net48 and net8.0-windows -->
+    <ItemGroup>
+      <Reference Include="Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f">
+        <HintPath>..\SharedLibs\Scripting.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <ItemGroup>

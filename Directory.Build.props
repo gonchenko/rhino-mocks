@@ -1,4 +1,8 @@
 <Project>
+  <PropertyGroup>
+    <!-- Enable building net8.0-windows targets on non-Windows (Linux/macOS) -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>
