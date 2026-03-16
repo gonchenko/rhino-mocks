@@ -1,5 +1,4 @@
 using Xunit;
-using Rhino.Mocks.Constraints;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {

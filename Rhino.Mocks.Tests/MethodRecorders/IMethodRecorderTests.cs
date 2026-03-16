@@ -31,7 +31,6 @@ using System;
 using System.Reflection;
 using Xunit;
 using Rhino.Mocks.Expectations;
-using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
 using Rhino.Mocks.Generated;
 using Rhino.Mocks.Tests.Expectations;

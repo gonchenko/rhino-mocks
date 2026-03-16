@@ -1,5 +1,4 @@
 using System;
-using Rhino.Mocks.Constraints;
 
 namespace Rhino.Mocks.Constraints
 {

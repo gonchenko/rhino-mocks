@@ -30,9 +30,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using Rhino.Mocks.Interfaces;
-using Rhino.Mocks.Utilities;
 
 namespace Rhino.Mocks.Impl
 {

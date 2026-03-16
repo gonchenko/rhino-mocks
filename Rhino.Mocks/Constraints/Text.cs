@@ -27,8 +27,6 @@
 #endregion
 
 
-using Rhino.Mocks.Constraints;
-
 namespace Rhino.Mocks.Constraints
 {
 	/*

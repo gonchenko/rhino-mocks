@@ -28,11 +28,9 @@
 
 
 using System;
-using System.IO;
 using System.Reflection;
 using Xunit;
 using Rhino.Mocks.Exceptions;
-using Rhino.Mocks.Interfaces;
 
 namespace Rhino.Mocks.Tests
 {

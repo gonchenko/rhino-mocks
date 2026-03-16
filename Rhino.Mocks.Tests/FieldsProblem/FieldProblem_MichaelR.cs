@@ -32,7 +32,6 @@ using Rhino.Mocks.Interfaces;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
-	using System;
 	using System.Diagnostics;
 	using System.IO;
 

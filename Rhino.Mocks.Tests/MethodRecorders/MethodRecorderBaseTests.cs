@@ -33,7 +33,6 @@ using Castle.DynamicProxy;
 using Xunit;
 using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Expectations;
-using Rhino.Mocks.Impl;
 using Rhino.Mocks.Interfaces;
 using Rhino.Mocks.MethodRecorders;
 using Rhino.Mocks.Generated;

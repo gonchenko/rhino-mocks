@@ -27,11 +27,7 @@
 #endregion
 
 
-using System;
-using System.Text;
-
 using Xunit;
-using Rhino.Mocks;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {

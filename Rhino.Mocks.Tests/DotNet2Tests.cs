@@ -29,7 +29,6 @@
 
 using System;
 using Xunit;
-using Rhino.Mocks.Exceptions;
 
 namespace Rhino.Mocks.Tests
 {

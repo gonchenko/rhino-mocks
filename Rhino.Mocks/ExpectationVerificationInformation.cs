@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Rhino.Mocks.Generated;
 using Rhino.Mocks.Interfaces;
 
 namespace Rhino.Mocks

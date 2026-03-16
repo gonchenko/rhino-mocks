@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using Xunit;
-using Rhino.Mocks;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {

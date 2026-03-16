@@ -28,7 +28,6 @@
 
 
 using System;
-using System.Reflection;
 using System.Text;
 using Castle.DynamicProxy;
 using Rhino.Mocks.Impl;

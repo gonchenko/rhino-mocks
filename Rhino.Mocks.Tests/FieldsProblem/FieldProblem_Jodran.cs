@@ -30,7 +30,6 @@
 
 using Xunit;
 using Rhino.Mocks.Exceptions;
-using Xunit.Extensions;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
