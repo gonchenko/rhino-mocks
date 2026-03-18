@@ -1,0 +1,95 @@
+# Stop the editor-config search from climbing above the repo root.
+root = true
+
+# ── Default: all files ─────────────────────────────────────────────────────
+[*]
+charset                  = utf-8
+end_of_line              = crlf
+trim_trailing_whitespace = true
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size  = 2
+
+# ── C# source files ────────────────────────────────────────────────────────
+[*.cs]
+indent_style = space
+indent_size  = 4
+tab_width    = 4
+
+# ============================================================
+# .NET Migration – Removal / Deprecation diagnostics
+# Base severity is set here; Directory.Build.props promotes a
+# subset to 'error' on the specific TFM where the API is gone.
+# ============================================================
+
+# BinaryFormatter is disabled by default in .NET 8 (SYSLIB0011).
+# Deserializing without a safe binder is a critical security issue.
+# CA2300/CA2301/CA2302 are kept as warnings globally so that the net48 build is not
+# broken by the legacy test coverage for BinaryFormatter (guarded with #if !NET8_0).
+# Project-level suppressions in GlobalSuppressions.cs handle the specific usages.
+dotnet_diagnostic.SYSLIB0011.severity = warning
+dotnet_diagnostic.CA2300.severity     = warning # Do not use BinaryFormatter (suppressed per-project via GlobalSuppressions.cs)
+dotnet_diagnostic.CA2301.severity     = warning # BinaryFormatter.Deserialize without binder (suppressed per-project via GlobalSuppressions.cs)
+dotnet_diagnostic.CA2302.severity     = warning # Ensure Binder is set before Deserialize
+
+# Code Access Security (CAS) calls are no-ops in .NET Core –
+# relying on them gives a false sense of security.
+dotnet_diagnostic.SYSLIB0003.severity = warning
+
+# AppDomain.CreateDomain() removed in .NET Core.
+dotnet_diagnostic.SYSLIB0051.severity = warning
+
+# Assembly.ReflectionOnlyLoad removed; use MetadataLoadContext instead.
+dotnet_diagnostic.SYSLIB0015.severity = warning
+
+# WebRequest / WebClient are obsolete; migrate to HttpClient.
+dotnet_diagnostic.SYSLIB0014.severity = warning
+
+# ============================================================
+# Cryptography – deprecated / unsafe primitives
+# ============================================================
+
+# Derived crypto type factories (MD5, SHA1CryptoServiceProvider, …) obsolete.
+dotnet_diagnostic.SYSLIB0021.severity = warning
+# RijndaelManaged is obsolete; use Aes.
+dotnet_diagnostic.SYSLIB0022.severity = warning
+# RNGCryptoServiceProvider is obsolete; use RandomNumberGenerator.Fill.
+dotnet_diagnostic.SYSLIB0023.severity = warning
+# SymmetricAlgorithm.Create(string) factory is obsolete.
+dotnet_diagnostic.SYSLIB0045.severity = warning
+# DES / TripleDES are deprecated as too weak.
+dotnet_diagnostic.SYSLIB0041.severity = warning
+# TLS 1.0 / 1.1 disabled by default in .NET 8 SslStream.
+dotnet_diagnostic.SYSLIB0039.severity = warning
+
+# Unsafe DataSet / DataTable deserialization (CA2350-CA2352).
+dotnet_diagnostic.CA2350.severity = error
+dotnet_diagnostic.CA2351.severity = error
+dotnet_diagnostic.CA2352.severity = error
+
+# ============================================================
+# Platform compatibility
+# ============================================================
+
+# Call sites of Windows-only APIs must be guarded by OperatingSystem.IsWindows()
+# or annotated with [SupportedOSPlatform("windows")].
+dotnet_diagnostic.CA1416.severity = warning
+
+# ============================================================
+# Modern .NET idioms – suggestions only (no CI impact)
+# These are surfaced in the IDE but do not fail the build.
+# ============================================================
+
+# Prefer ArgumentNullException.ThrowIfNull / ArgumentOutOfRangeException.Throw*
+dotnet_diagnostic.CA1510.severity = suggestion
+dotnet_diagnostic.CA1511.severity = suggestion
+dotnet_diagnostic.CA1512.severity = suggestion
+dotnet_diagnostic.CA1513.severity = suggestion
+
+# Use string.Contains(char) instead of string.Contains(string) when checking
+# for a single character.
+dotnet_diagnostic.CA1847.severity = suggestion
+
+# Prefer Memory<T> / Span<T> overloads of stream / string APIs.
+dotnet_diagnostic.CA1835.severity = suggestion
