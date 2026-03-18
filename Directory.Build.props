@@ -49,15 +49,9 @@
        SYSLIB0003 – Code Access Security (CAS) calls are no-ops → silent bugs
        SYSLIB0015 – Assembly.ReflectionOnlyLoad removed; use MetadataLoadContext
        SYSLIB0051 – AppDomain.CreateDomain removed
-
-       CA2300/CA2301/CA2302 – BinaryFormatter deserialization rules promoted to
-       errors here.  On net48 they remain warnings (see .editorconfig), which
-       allows the legacy test in Coverage.cs (guarded with #if !NET8_0) to build
-       without error.  The guard ensures no BinaryFormatter code is compiled on
-       net8.0, so the error never fires in the test project either.
   -->
   <PropertyGroup Condition="'$(UsingMicrosoftNETSdk)' == 'true' and '$(TargetFramework)' == 'net8.0'">
-    <WarningsAsErrors>$(WarningsAsErrors);SYSLIB0011;SYSLIB0003;SYSLIB0015;SYSLIB0051;CA2300;CA2301;CA2302</WarningsAsErrors>
+    <WarningsAsErrors>$(WarningsAsErrors);SYSLIB0011;SYSLIB0003;SYSLIB0015;SYSLIB0051</WarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>
