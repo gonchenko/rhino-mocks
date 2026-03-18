@@ -539,7 +539,6 @@ namespace Rhino.Mocks.Tests
             demo.AssertWasNotCalled(x => x.FooBar);
         }
 
-#if !FOR_NET_2_0 // we can't get the structure from a delegate, as happens on 2.0, so ignore this
 		[Fact]
 		public void CanAssertOnMethodCallUsingConstraints_WhenMethodNotFound()
 		{
@@ -553,7 +552,6 @@ namespace Rhino.Mocks.Tests
             Assert.Throws<ExpectationViolationException>(
                 () => demo.AssertWasCalled(x => x.Bar(Arg<string>.Matches((string a) => a.StartsWith("b") && a.Contains("ba")))));
 		}
-#endif
 
 		[Fact]
 		public void CannotUseRepeatAny()
