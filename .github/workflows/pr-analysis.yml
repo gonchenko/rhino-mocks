@@ -44,9 +44,15 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          # global.json pins the exact SDK patch so dotnet format (built-in
-          # to the SDK since .NET 6) always runs at the same version.
+          # dotnet format is a built-in SDK command (available since .NET 6),
+          # NOT a separate installable tool, so no dotnet-tools.json manifest
+          # or explicit "dotnet tool install" step is required.
+          # global.json pins the exact SDK patch version, which fixes the
+          # dotnet format version implicitly and reproducibly.
           global-json-file: global.json
+
+      - name: Confirm dotnet format version
+        run: dotnet format --version
 
       - name: Restore
         run: dotnet restore
