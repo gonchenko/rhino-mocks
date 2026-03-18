@@ -59,4 +59,12 @@
   <PropertyGroup Condition="'$(UsingMicrosoftNETSdk)' == 'true' and '$(TargetFramework)' == 'net8.0'">
     <WarningsAsErrors>$(WarningsAsErrors);SYSLIB0011;SYSLIB0003;SYSLIB0015;SYSLIB0051;CA2300;CA2301;CA2302</WarningsAsErrors>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Enable building net8.0-windows targets on non-Windows (Linux/macOS) -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
 </Project>

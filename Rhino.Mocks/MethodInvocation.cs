@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using Castle.DynamicProxy;
 using Rhino.Mocks.Interfaces;

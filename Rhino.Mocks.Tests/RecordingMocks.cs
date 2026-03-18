@@ -53,8 +53,8 @@ namespace Rhino.Mocks.Tests
 
 			foo.Stub(x => x.bar()).Return("open");
 			// several calls to 'foo.bar()
-			Assert.Equal(foo.bar(), "open");
-			Assert.Equal(foo.bar(), "open");
+			Assert.Equal("open", foo.bar());
+			Assert.Equal("open", foo.bar());
 
 			foo.BackToRecord();
 
@@ -63,8 +63,8 @@ namespace Rhino.Mocks.Tests
 			foo.Replay();
 
 			// several calls to 'foo.bar()
-			Assert.Equal(foo.bar(), "closed");
-			Assert.Equal(foo.bar(), "closed");
+			Assert.Equal("closed", foo.bar());
+			Assert.Equal("closed", foo.bar());
 		}
 
 
@@ -104,7 +104,7 @@ namespace Rhino.Mocks.Tests
 			Assert.Equal(1, foo54.DoSomething());
 
 			foo54.AssertWasCalled(x => x.DoSomething());
-			Assert.Equal(1, foo54.GetArgumentsForCallsMadeOn(x => x.DoSomething()).Count);
+			Assert.Single(foo54.GetArgumentsForCallsMadeOn(x => x.DoSomething()));
 		}
 
 		[Fact]
@@ -143,7 +143,7 @@ namespace Rhino.Mocks.Tests
 
 			foo54.AssertWasCalled(x => x.DoSomething());
 			IList<object[]> arguments = foo54.GetArgumentsForCallsMadeOn(x => x.DoSomething());
-			Assert.Equal(0, arguments[0].Length);
+			Assert.Empty(arguments[0]);
 		}
 
 		[Fact]
@@ -539,7 +539,6 @@ namespace Rhino.Mocks.Tests
             demo.AssertWasNotCalled(x => x.FooBar);
         }
 
-#if !FOR_NET_2_0 // we can't get the structure from a delegate, as happens on 2.0, so ignore this
 		[Fact]
 		public void CanAssertOnMethodCallUsingConstraints_WhenMethodNotFound()
 		{
@@ -553,7 +552,6 @@ namespace Rhino.Mocks.Tests
             Assert.Throws<ExpectationViolationException>(
                 () => demo.AssertWasCalled(x => x.Bar(Arg<string>.Matches((string a) => a.StartsWith("b") && a.Contains("ba")))));
 		}
-#endif
 
 		[Fact]
 		public void CannotUseRepeatAny()

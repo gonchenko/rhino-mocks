@@ -7,6 +7,10 @@
     <TargetFrameworks>net48;net8.0</TargetFrameworks>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net48' AND '$(OS)' != 'Windows_NT'">
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>TRACE;DEBUG;DOTNET35</DefineConstants>
   </PropertyGroup>

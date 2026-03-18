@@ -28,7 +28,6 @@
 
 
 using System;
-using System.Reflection;
 using Castle.DynamicProxy;
 using Rhino.Mocks.Constraints;
 using Rhino.Mocks.Impl;

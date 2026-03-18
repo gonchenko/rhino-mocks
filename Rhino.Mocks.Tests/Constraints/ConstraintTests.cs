@@ -32,8 +32,6 @@ using System.Data;
 using Xunit;
 using Rhino.Mocks.Constraints;
 using Rhino.Mocks.Exceptions;
-using Rhino.Mocks.Impl;
-using Rhino.Mocks.Tests.Callbacks;
 
 namespace Rhino.Mocks.Tests.Constraints
 {

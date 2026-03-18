@@ -28,13 +28,9 @@
 
 
 using System;
-using System.Data;
 using Xunit;
-using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
 using Rhino.Mocks.Exceptions;
-using Rhino.Mocks.Impl;
-using Rhino.Mocks.Tests.Callbacks;
 using System.Collections.Generic;
 
 namespace Rhino.Mocks.Tests

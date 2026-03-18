@@ -27,7 +27,6 @@
 #endregion
 
 
-using System;
 using Xunit;
 using Rhino.Mocks.Impl;
 

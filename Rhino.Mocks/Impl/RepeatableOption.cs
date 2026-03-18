@@ -27,8 +27,6 @@
 #endregion
 
 
-using System;
-
 namespace Rhino.Mocks.Impl
 {
 	/// <summary>

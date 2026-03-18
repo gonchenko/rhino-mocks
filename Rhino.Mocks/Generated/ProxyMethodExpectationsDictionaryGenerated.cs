@@ -27,9 +27,7 @@
 #endregion
 
 
-using System.Collections;
 using Rhino.Mocks.MethodRecorders;
-using Rhino.Mocks.Impl;
 
 namespace Rhino.Mocks.Generated
 {

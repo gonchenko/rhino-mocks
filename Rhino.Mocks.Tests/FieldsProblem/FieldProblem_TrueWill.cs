@@ -1,7 +1,6 @@
 #if DOTNET35
 using System;
 using Xunit;
-using Rhino.Mocks;
 
 namespace Rhino.Mocks.Tests.FieldsProblem
 {
@@ -14,7 +13,7 @@ namespace Rhino.Mocks.Tests.FieldsProblem
             ISomeThing thing = MockRepository.GenerateStub<ISomeThing>();
             thing.Number = 21;
             thing.Stub(x => x.Name).Return("Bob");
-            Assert.Equal(thing.Number, 21);
+            Assert.Equal(21, thing.Number);
             // Fails - calling Stub on anything after
             // setting property resets property to default.
         }

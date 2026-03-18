@@ -34,7 +34,6 @@ using Rhino.Mocks.Exceptions;
 using Rhino.Mocks.Impl;
 using Rhino.Mocks.Tests.Expectations;
 using Rhino.Mocks.Tests.Utilities;
-using Castle.DynamicProxy;
 
 namespace Rhino.Mocks.Tests.Impl
 {

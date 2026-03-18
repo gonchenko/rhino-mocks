@@ -27,9 +27,6 @@
 #endregion
 
 
-using System;
-using System.Text;
-using Rhino.Mocks;
 using System.Data;
 using Xunit;
 using Rhino.Mocks.Exceptions;
