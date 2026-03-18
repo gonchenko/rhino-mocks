@@ -25,12 +25,12 @@ tab_width    = 4
 
 # BinaryFormatter is disabled by default in .NET 8 (SYSLIB0011).
 # Deserializing without a safe binder is a critical security issue.
-# CA2300/CA2301 are suppressed globally because the only usage is in a legacy test
-# guarded with #if !NET8_0 in Rhino.Mocks.Tests/Coverage.cs.
-# CA2302 is kept as a warning to flag any new unsafe usage.
+# CA2300/CA2301/CA2302 are kept as warnings globally so that the net48 build is not
+# broken by the legacy test coverage for BinaryFormatter (guarded with #if !NET8_0).
+# Project-level suppressions in GlobalSuppressions.cs handle the specific usages.
 dotnet_diagnostic.SYSLIB0011.severity = warning
-dotnet_diagnostic.CA2300.severity     = none    # Suppress BinaryFormatter.Deserialize globally (legacy test coverage)
-dotnet_diagnostic.CA2301.severity     = none    # Suppress BinaryFormatter.Deserialize globally (legacy test coverage)
+dotnet_diagnostic.CA2300.severity     = warning # Do not use BinaryFormatter (suppressed per-project via GlobalSuppressions.cs)
+dotnet_diagnostic.CA2301.severity     = warning # BinaryFormatter.Deserialize without binder (suppressed per-project via GlobalSuppressions.cs)
 dotnet_diagnostic.CA2302.severity     = warning # Ensure Binder is set before Deserialize
 
 # Code Access Security (CAS) calls are no-ops in .NET Core –
@@ -75,13 +75,6 @@ dotnet_diagnostic.CA2352.severity = error
 # Call sites of Windows-only APIs must be guarded by OperatingSystem.IsWindows()
 # or annotated with [SupportedOSPlatform("windows")].
 dotnet_diagnostic.CA1416.severity = warning
-
-# String comparison without explicit StringComparison – suppressed globally because
-# the existing codebase uses culture-invariant string operations intentionally.
-dotnet_diagnostic.CA1310.severity = none
-# Prefer string.StartsWith(char)/EndsWith(char) over single-char string overloads –
-# suppressed globally; low-risk style improvement, not a migration concern.
-dotnet_diagnostic.CA1866.severity = none
 
 # ============================================================
 # Modern .NET idioms – suggestions only (no CI impact)
