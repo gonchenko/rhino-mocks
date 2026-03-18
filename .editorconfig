@@ -27,12 +27,11 @@ tab_width    = 4
 # Deserializing without a safe binder is a critical security issue.
 # CA2300/CA2301/CA2302 are kept as warnings globally so that the net48 build is not
 # broken by the legacy test coverage for BinaryFormatter (guarded with #if !NET8_0).
-# Directory.Build.props promotes these three rules to errors on net8.0, where
-# BinaryFormatter is disabled at runtime and the test guard prevents any usage.
+# Project-level suppressions in GlobalSuppressions.cs handle the specific usages.
 dotnet_diagnostic.SYSLIB0011.severity = warning
-dotnet_diagnostic.CA2300.severity     = warning # Do not use BinaryFormatter (error on net8.0 via WarningsAsErrors)
-dotnet_diagnostic.CA2301.severity     = warning # BinaryFormatter.Deserialize without binder (error on net8.0 via WarningsAsErrors)
-dotnet_diagnostic.CA2302.severity     = warning # Ensure Binder is set before Deserialize (error on net8.0 via WarningsAsErrors)
+dotnet_diagnostic.CA2300.severity     = warning # Do not use BinaryFormatter (suppressed per-project via GlobalSuppressions.cs)
+dotnet_diagnostic.CA2301.severity     = warning # BinaryFormatter.Deserialize without binder (suppressed per-project via GlobalSuppressions.cs)
+dotnet_diagnostic.CA2302.severity     = warning # Ensure Binder is set before Deserialize
 
 # Code Access Security (CAS) calls are no-ops in .NET Core –
 # relying on them gives a false sense of security.
