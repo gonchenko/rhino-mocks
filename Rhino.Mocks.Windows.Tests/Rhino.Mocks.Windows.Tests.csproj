@@ -38,7 +38,7 @@
       <Reference Include="System.Windows.Forms" />
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-windows' AND '$(OS)' == 'Windows_NT'">
       <UseWindowsForms>true</UseWindowsForms>
     </PropertyGroup>
 
