@@ -20,7 +20,7 @@ This plan outlines key improvements to align Rhino Mocks with modern .NET practi
 ## 2. Nullability Enablement
 **Action**: Enable `<Nullable>enable</Nullable>` centrally in `Directory.Build.props` rather than repeating it across project files; if needed, gate it with `Condition="'$(UsingMicrosoftNETSdk)' == 'true'"` for SDK-style projects only.  
 **Rationale**:
-- Prevents 20%+ null reference exceptions common in legacy codebases
+- Helps reduce null reference exceptions in legacy codebases by surfacing null-safety issues earlier
 - Modern .NET best practice since C# 8.0 (2019)
 - Centralizing the setting in `Directory.Build.props` reduces drift and maintenance overhead across multiple projects
 
