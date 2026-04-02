@@ -32,10 +32,10 @@ This plan outlines key improvements to align Rhino Mocks with modern .NET practi
 ---
 
 ## 3. API Modernization
-**Action**: Remove `DOTNET35` conditional and migrate AAA API  
+**Action**: Remove or relax `DOTNET35` conditional gating around the AAA API and clean up related `DefineConstants` usage  
 **Rationale**:
 - .NET 3.5 is obsolete (EOL 2017)
-- AAA API currently targets unsupported framework
+- AAA extension methods are currently gated behind the `DOTNET35` compilation symbol, even when targeting newer TFMs
 
 **Implementation**:
 ```diff
