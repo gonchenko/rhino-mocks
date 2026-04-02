@@ -51,14 +51,18 @@ public static void Expect(...) { ... } // No conditional
 ---
 
 ## 4. Critical TODO Remediation
-**Action**: Replace `Marshal.GetExceptionCode()` in .NET 8.0 build  
-**Current Issue**:
-```csharp
-// TODO: Replace Marshal.GetExceptionCode() with a supported alternative
-```
-**Solution**:
-- Use `Exception.HResult` for error code handling
-- Update all references in `Impl/` namespace
+**Action**: Replace `Marshal.GetExceptionCode()` in `Rhino.Mocks/MockRepositoryRecordPlayback.cs`  
+**Current Issue**:  
+`DisposableActionsHelper.ExceptionWasThrownAndDisposableActionShouldNotBeCalled()` calls `Marshal.GetExceptionCode()` (obsolete, CS0618) to detect whether an exception is in-flight during `Dispose()` — not to read an error code or HRESULT. This call has no equivalent on Mono (already skipped) and no direct equivalent on .NET 8.0.  
+**Note**: `Exception.HResult` is not applicable here because no exception instance is available in this context; the purpose is to determine whether *any* exception is currently unwinding the stack.  
+
+**Proposed Approaches** (pick one):
+1. **Refactor the API**: Introduce an explicit `Commit()` or `Complete()` method so callers signal success rather than relying on stack-unwind detection in `Dispose()`. This is the cleanest long-term solution.
+2. **Accept a behavior change**: Remove the unwind detection entirely and always run `VerifyAll()` / replay in `Dispose()`. Document that callers must not rely on automatic suppression when an exception is in-flight.
+
+**Call sites to update**:
+- `Rhino.Mocks/MockRepositoryRecordPlayback.cs` — `DisposableActionsHelper.ExceptionWasThrownAndDisposableActionShouldNotBeCalled()`
+- `Rhino.Mocks/Rhino.Mocks.csproj` — `GlobalSuppressions.cs` suppression and associated TODO comment
 
 ---
 
