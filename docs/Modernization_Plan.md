@@ -84,6 +84,24 @@ public static void Expect(...) { ... } // No conditional
 
 ---
 
+## 7. Static Code Analysis
+
+**Action**: Address all current CA warnings raised by the .NET analyzer, or document intentional suppressions with justification.
+
+**Rationale**:
+- Unaddressed analyzer warnings indicate potential correctness, performance, and design issues
+- Treating warnings as actionable keeps the codebase aligned with modern .NET guidelines
+
+**Warnings to fix**:
+- `CA1050`: Types should be declared in namespaces.
+- `CA1707`: Type names should not contain underscores.
+- `CA1000`: Avoid declaring static members on generic types.
+- `CA2211`: Non-constant fields should not be visible.
+- `CA1805`: Member explicitly initialized to its default value.
+- `CA1716`: Types should not conflict with reserved language keywords.
+
+**Verification**: Build produces zero unaddressed CA warnings; any intentional suppressions include a `<Justification>` explaining why.
+
 ## Timeline
 | Phase | Duration | Deliverable |
 |-------|----------|-------------|
