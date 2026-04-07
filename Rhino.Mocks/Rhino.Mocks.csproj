@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <RepositorySignatures>None</RepositorySignatures>
     <Version>4.0.0</Version>
     <VersionSuffix>alpha</VersionSuffix>
     <PackageId>Rhino.Mocks.Light</PackageId>
@@ -62,11 +63,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.3.1" />
+    <PackageReference Include="Castle.Core" Version="5.2.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
-  
-  
+
+
 <!--
     <PropertyGroup>
       <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -80,7 +81,5 @@
     </PropertyGroup>
     <ItemGroup>
   -->
-  
+
 </Project>
-
-
